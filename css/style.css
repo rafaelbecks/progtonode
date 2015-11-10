@@ -1,0 +1,103 @@
+
+a{
+		color:#fff !important;
+}
+h1{
+	font-family: 'Megrim', cursive;
+}
+
+.navbar-brand,p,h2,h3,h4, a{
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 400;
+}
+
+.cover p{
+	font-weight: 400;
+}
+
+.main-banner{
+  position: absolute;
+  top: 30vh;
+  left: 0;
+}
+
+.btn-primary{
+	  border-radius: 0px;
+	  background: transparent;
+	  border: 1px solid #fff;
+}
+
+
+
+.input-search{
+	  background: transparent;
+	  border: 1px solid rgba(255,255,255,.5);
+	  padding: 12px 10px 12px 10px;
+	  width: 284px;
+	  color: #fff;
+}
+
+.search-button{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.5);
+  color: #fff;
+  font-size: 23px;
+  display: inline-block;
+  /* height: 38px; */
+  padding: 2px 12px 10px 11px;
+}
+
+.search-button span{
+	  position: relative;
+	  top: 2px;
+}
+
+.social{
+	font-size: 31px;
+  margin-right: 18px;
+}
+
+::-webkit-input-placeholder {
+   color: #fff;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #fff;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #fff;  
+}
+
+:-ms-input-placeholder {  
+   color: #fff;  
+}
+
+::-webkit-scrollbar { width: 4px;  height: 4px; background-color: #999;}    
+::-webkit-scrollbar-track { background-color: #00CCCC;} 
+::-webkit-scrollbar-track-piece { background-color: #999; } 
+::-webkit-scrollbar-thumb {  background-color: #222;	border: none;} 
+::-webkit-scrollbar-button:end:increment { display:none;}
+::-webkit-scrollbar-button:start:decrement{  display:none;}
+::-webkit-scrollbar-corner {background-color: #999;}
+
+#graph{
+	  width: 100%;
+  height: 100vh;
+}
+
+.sigma-mouse{
+	position: relative !important;
+}
+
+.results-div{
+	background:url('../img/graph.jpg');
+	background-size: cover;
+	background-position: center;
+}
+
+.text-primary{
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 200;
+	color:#fff;
+}

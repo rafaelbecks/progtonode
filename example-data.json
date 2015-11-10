@@ -1,0 +1,77 @@
+{
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "Steven Wilson",
+      "x": 0,
+      "y": 0,
+      "color":"#00FF0D",
+      "size": 3
+    },
+    {
+      "id": "n1",
+      "label": "Gutrhie Govan",
+      "x": 3,
+      "y": 1,
+      "color": "#09f",
+      "size": 3
+    },
+    {
+      "id": "n2",
+      "label": "Marco Minneman",
+      "x": 1,
+      "y": 3,
+      "color": "#97c",
+      "size": 3
+    },
+    {
+      "id": "n3",
+      "label": "Gavin Harrison",
+      "x": 1,
+      "y": 2,
+      "color" :"#33BB35",
+      "size": 3
+    },
+        {
+      "id": "n4",
+      "label": "Porcupine Tree",
+      "x": 3,
+      "y": 2,
+      "color":"#FF7070",
+      "size": 3
+    }
+  ],
+  "edges": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1"
+    },
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2"
+    },
+    {
+      "id": "e2",
+      "source": "n2",
+      "target": "n0"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "target": "n4"
+    },
+    {
+      "id": "e4",
+      "source": "n0",
+      "target": "n4"
+    },
+    {
+      "id": "e5",
+      "source": "n0",
+      "target": "n3"
+    }
+
+  ]
+}

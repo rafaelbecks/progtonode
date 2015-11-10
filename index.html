@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Prog Network</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,200' rel='stylesheet' type='text/css'>
+        <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
+        rel="stylesheet" type="text/css">
+        <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="js/particles.min.js"></script>
+        <script type="text/javascript" src="js/sigma.min.js"></script>
+        <script src="js/sigma.parsers.json.min.js"></script>
+    </head>
+    
+    <body>
+
+
+        <div class="cover">
+            <div class="navbar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><span>Prog Network</span></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active">
+                                <a href="#">How it works?</a>
+                            </li>
+                            <li class="active">
+                                <a href="#">About</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="cover-image"></div>
+            <center class="container" id="particles-js">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center main-banner">
+                        <h1 class="text-inverse">Prog Network</h1>
+                        <p class="text-inverse">Graph search for prog music</p>
+                        <input type="text" class="input-search" placeholder="Search for a band, project, musician"/>  
+                        <button class="search-button"><span class="ion-ios-search"></span></button>
+                        <br>
+                        <br>
+                        <!--a class="btn btn-lg btn-primary">Click me</a-->
+                    </div>
+                </div>
+            </center>
+        </div>
+        <div class="section results-div">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <center>
+                            <h1 class="text-primary">Results</h1>
+                        
+                            <div class="results container">
+                                <div id="graph">
+                                    
+                                </div>
+                            </div>
+                        </center>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="text-primary">How it works?</h1>
+                        <h3>Aquí se explica como funciona</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+                            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+                            dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
+                            nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
+                            Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
+                            enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
+                            felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+                            elementum semper nisi.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="img/demo.gif"
+                        class="img-responsive">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="section section-primary footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p></br></br></br>Copyright &copy; 2015</p>                  </div>
+                    <div class="col-sm-6">
+                        <p class="text-info text-right">
+                            <br>
+                            <br>
+                        </p>
+                        <div class="row">
+                            <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                                <a href="#"><i class="social ion-social-instagram text-inverse"></i></a>
+                                <a href="#"><i class="social ion-social-twitter text-inverse"></i></a>
+                                <a href="#"><i class="social ion-social-facebook text-inverse"></i></a>
+                                <a href="#"><i class="social ion-social-github text-inverse"></i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 hidden-xs text-right">
+                                <a href="#"><i class="social ion-social-instagram text-inverse"></i></a>
+                                <a href="#"><i class="social ion-social-twitter text-inverse"></i></a>
+                                <a href="#"><i class="social ion-social-facebook text-inverse"></i></a>
+                                <a href="#"><i class="social ion-social-github text-inverse"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+            <script>
+                    particlesJS.load('particles-js', 'particles.json', function() {
+                      console.log('callback - particles.js config loaded');
+                    });
+
+                    sigma.parsers.json('example-data.json', {
+                        container: 'graph',
+                        settings: {
+                          defaultNodeColor: '#fff',
+                          defaultLabelColor:'#fff'
+                        }
+                   });
+                    $(document).ready(function(){
+                        var bg=Math.floor((Math.random() * 3) + 1);
+                        $(".cover-image,.footer").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover;")
+                    });
+           </script>
+    </body>
+
+</html>
