@@ -34,7 +34,8 @@ h1{
 	  border: 1px solid rgba(255,255,255,.5);
 	  padding: 12px 10px 12px 10px;
 	  width: 284px;
-	  color: #fff;
+	  color: #fff;  });
+
 }
 
 .search-button{
@@ -179,4 +180,8 @@ h1{
 
 .result-text{
 	margin-top: 0px;
+}
+
+text{
+	fill: white;
 }
