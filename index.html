@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="progtonode">
     
     <head>
-        <title>Prog Network</title>
+        <title>ProgToNode - Graph search for prog music</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13,14 +13,19 @@
         rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="js/particles.min.js"></script>
-        <script type="text/javascript" src="js/sigma.min.js"></script>
-        <script src="js/sigma.parsers.json.min.js"></script>
+        <!-- libs -->
+        <script type="text/javascript" src="js/lib/angular.min.js"></script>
+        <script type="text/javascript" src="js/lib/particles.min.js"></script>
+        <script type="text/javascript" src="js/lib/sigma.min.js"></script>
+        <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
+        <!-- App files -->
+        <script type="text/javascript" src="js/app/main.js"></script>
+        <script type="text/javascript" src="js/app/services.js"></script>
+        <script type="text/javascript" src="js/app/controllers.js"></script>
+
     </head>
     
-    <body>
-
-
+    <body ng-controller="mainController">
         <div class="cover">
             <div class="navbar">
                 <div class="container">
@@ -31,7 +36,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><span>Prog Network</span></a>
+                        <a class="navbar-brand" href="#"><span>ProgToNode</span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -50,10 +55,11 @@
             <center class="container" id="particles-js">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center main-banner">
-                        <h1 class="text-inverse">Prog Network</h1>
+                        <!--h1 class="text-inverse">Prog Network</h1-->
+                        <img src="img/logolight.png" class="main-logo">
                         <p class="text-inverse">Graph search for prog music</p>
-                        <input type="text" class="input-search" placeholder="Search for a band, project, musician"/>  
-                        <button class="search-button"><span class="ion-ios-search"></span></button>
+                        <input type="text" ng-enter="searchArtist(keywordSearch);" class="input-search" ng-model="keywordSearch" placeholder="Search for a band, project, musician"/>  
+                        <button ng-click="searchArtist(keywordSearch);" class="search-button"><span class="ion-ios-search"></span></button>
                         <br>
                         <br>
                         <!--a class="btn btn-lg btn-primary">Click me</a-->
@@ -61,17 +67,62 @@
                 </div>
             </center>
         </div>
-        <div class="section results-div">
+        <div class="section results-div" id="results">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <center>
-                            <h1 class="text-primary">Results</h1>
+                            <h2 class="text-primary result-text">Results</h2>
                         
                             <div class="results container">
-                                <div id="graph">
-                                    
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <graph></graph>
                                 </div>
+                                <div class="col-md-4 white-info">
+                                    <h3>{{artistBase.name}}</h3>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <img ng-src="{{img_artist}}">
+                                        </div>    
+                                        <div class="col-md-6 div-description">
+                                            <p class="artist-description" ng-bind-html="artistBase.profile"></p>
+                                        </div>
+                                    </div>
+                                    <div ng-if="artistBase.groups!=undefined " class="row projects-members">
+                                        <div class="col-md-6">
+                                            <h4>Active Projects</h4>
+                                            <ul class="groups-members">
+                                                <li ng-if="projects.active==true" ng-repeat="projects in artistBase.groups">{{projects.name}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4>Previous Projects</h4>
+                                            <ul class="groups-members">
+                                                <li ng-if="projects.active==false" ng-repeat="projects in artistBase.groups">{{projects.name}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div ng-if="artistBase.members!=undefined" class="row projects-members">
+                                        <div class="col-md-6">
+                                            <h4>Current members</h4>
+                                            <ul class="groups-members">
+                                                <li ng-if="musician.active==true" ng-repeat="musician in artistBase.members">{{musician.name}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h4>Previous members</h4>
+                                            <ul class="groups-members">
+                                                <li ng-if="musician.active==false" ng-repeat="musician in artistBase.members">{{musician.name}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="buttons">
+                                        <button class="btn info-buttons"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
+                                        <button class="btn info-buttons"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</buttonn>                                    
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </center>
                         
@@ -138,18 +189,67 @@
                       console.log('callback - particles.js config loaded');
                     });
 
-                    sigma.parsers.json('example-data.json', {
-                        container: 'graph',
-                        settings: {
-                          defaultNodeColor: '#fff',
-                          defaultLabelColor:'#fff'
-                        }
-                   });
+                   
                     $(document).ready(function(){
-                        var bg=Math.floor((Math.random() * 3) + 1);
+                        var bg=Math.floor((Math.random() * 4) + 1);
                         $(".cover-image,.footer").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover;")
                     });
            </script>
+<script src="js/lib/d3.v3.min.js"></script>
+<script>
+
+var width = 780,
+    height = 600;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-300)
+    .linkDistance(60)
+    .size([width, height]);
+
+var svg = d3.select("graph").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("example-data.json", function(error, graph) {
+  if (error) throw error;
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 5)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+});
+
+</script>
+
     </body>
 
 </html>
