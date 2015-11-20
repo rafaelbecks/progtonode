@@ -1,4 +1,6 @@
 
+//Function to build the svg graph. Set the visual configs of graph here
+
 function drawGraph(graph){
 d3.select("svg").remove();
 var width = 780,

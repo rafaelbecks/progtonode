@@ -1,3 +1,9 @@
+/*
+Angular services to connect to Discogs API via jsonp
+Author: Rafael Becerra
+Date: 19/11/2015
+*/
+
 progtonode.factory("services", ['$http', function($http) {
 	 var obj = {};
 	 var serviceBase="https://api.discogs.com/";
@@ -13,7 +19,7 @@ progtonode.factory("services", ['$http', function($http) {
 
 	  obj.searchMusic=function(keyword){
 	  	return $http.jsonp(serviceBase+"database/search?q="+keyword+"&key="+key+"&secret="+secret+"&callback=JSON_CALLBACK").success(function(data){
-	 			console.log(data);	
+	 			console.log("OK");	
 	      });	  	
 	  }
 

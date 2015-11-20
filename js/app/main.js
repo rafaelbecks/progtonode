@@ -1,3 +1,9 @@
+/*
+Angular main module of the app, the directives are written here too.
+Author: Rafael Becerra
+Date: 19/11/2015
+*/
+
 if(document.URL.indexOf("#")==-1){
   location.href="#/";
 }
@@ -11,7 +17,6 @@ progtonode.directive('ngEnter', function () {
                 scope.$apply(function (){
                     scope.$eval(attrs.ngEnter);
                 });
-
                 event.preventDefault();
             }
         });
