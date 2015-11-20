@@ -25,6 +25,10 @@ progtonode.controller('mainController', function($scope ,$http, services){
 	};
 
 	$scope.showArtistData=function(id,thumb){
+	 graph={
+	  "nodes":[],
+	  "links":[]
+ 	 };
 	$scope.img_artist=thumb;
  	 //jQuery way to animate scroll to results, must find angular way
 	$("html, body").animate({ scrollTop: $('#results').offset().top }, 1000);
