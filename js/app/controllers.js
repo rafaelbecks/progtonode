@@ -5,40 +5,43 @@ Date: 19/11/2015
 */
 
 progtonode.controller('mainController', function($scope ,$http, services){
+	$scope.searching=false;
 	$scope.searchArtist=function(keyword){
-
 	 graph={
 	  "nodes":[],
 	  "links":[]
  	 };
- 	 //jQuery way to animate scroll to results, must find angular way
-	$("html, body").animate({ scrollTop: $('#results').offset().top }, 1000);
+	$(".main-banner").addClass("show-results"); 
 	location.href="#"+keyword;
+	$scope.searching=true;
 	services.searchMusic(keyword).then(function(data){
-		true_data=data.data.data;
-		//Get the first result, just for testing, the app will show at least 5 results
-		result=true_data.results[0].id;
+		$scope.searching=false;
+		$scope.searchIsDone=true;
+		$scope.results=data.data.data.results;
+		//result=true_data.results[0].id;
 		//Setting thumb image and getting artist info from API
-		$scope.img_artist=true_data.results[0].thumb;
-		showArtistData(result);
+//		showArtistData(result);
 	});	
 	};
 
-	showArtistData=function(id){
+	$scope.showArtistData=function(id,thumb){
+	$scope.img_artist=thumb;
+ 	 //jQuery way to animate scroll to results, must find angular way
+	$("html, body").animate({ scrollTop: $('#results').offset().top }, 1000);
 	services.getArtistInfo(id).then(function(data){
 		$scope.artistBase=data.data.data;
 		//Build graph in case artist is musician
 		if($scope.artistBase.groups!=undefined)
-			buildGraph($scope.artistBase.name,$scope.artistBase.groups);
+			buildGraph($scope.artistBase.name,$scope.artistBase.groups,0);
 		//Build graph in case artist is band/project
 		if($scope.artistBase.members!=undefined)
-			buildGraph($scope.artistBase.name,$scope.artistBase.members);				
+			buildGraph($scope.artistBase.name,$scope.artistBase.members,0);				
 		buildProfileText($scope.artistBase.profile);
 	});
 	};
 
 
-	buildGraph=function(name,groups){
+	buildGraph=function(name,groups,level){
 		graph.nodes.push({"name":name,"group":1});
 		for(var i=0;i<groups.length; i++){
 			if(groups[i].active)

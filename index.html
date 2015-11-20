@@ -9,6 +9,7 @@
         <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,200' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
         rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -62,10 +63,22 @@
                         <img src="img/logolight.png" class="main-logo">
                         <p class="text-inverse">Graph search for prog music</p>
                         <input type="text" ng-enter="searchArtist(keywordSearch);" class="input-search" ng-model="keywordSearch" placeholder="Search for a band, project, musician"/>  
-                        <button ng-click="searchArtist(keywordSearch);" class="search-button"><span class="ion-ios-search"></span></button>
+                        <button ng-click="searchArtist(keywordSearch);" class="search-button"><span ng-class="{ 'ion-load-c fa-spin': searching, 'ion-ios-search': searching==false }"></span></button>
                         <br>
                         <br>
-                        <!--a class="btn btn-lg btn-primary">Click me</a-->
+
+
+                         
+
+
+                        <center>
+                            <ul class="search-results row" ng-show="searchIsDone==true">
+                                <center><p>Results:</p></center>
+                                <li ng-click="showArtistData(res.id,res.thumb);" ng-repeat="res in results" class="col-md-6" ng-if="$index<=7">
+                                <img class="search-thumb" ng-src="{{res.thumb}}">
+                                {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}</li>
+                            </ul>                            
+                        </center>
                     </div>
                 </div>
             </center>

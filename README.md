@@ -17,3 +17,12 @@ Some of the tools and libs being used:
 + http://vincentgarreau.com/particles.js/
 
 Any comments and suggestions are welcome
+
+
+TO DO
+
++ Add links to bands/artists in card info
++ Build 2nd level graph
++ Add loader to graph section
++ Add text to to other sections
++ Add sections with project people info
