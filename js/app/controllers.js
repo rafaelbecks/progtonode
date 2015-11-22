@@ -6,10 +6,6 @@ Date: 19/11/2015
 
 progtonode.controller('mainController', function($scope ,$http, services){
 
-	$scope.something=function(){
-		alert("works");
-	};
-
 	$scope.searching=false;
 	$scope.searchArtist=function(keyword){
 	 graph={
@@ -17,7 +13,6 @@ progtonode.controller('mainController', function($scope ,$http, services){
 	  "links":[]
  	 };
 	$(".main-banner").addClass("show-results"); 
-	location.href="#"+keyword;
 	$scope.searching=true;
 	services.searchMusic(keyword).then(function(data){
 		$scope.searching=false;
@@ -33,6 +28,7 @@ progtonode.controller('mainController', function($scope ,$http, services){
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
+	location.href="#id="+id;
 		 graph={
 		  "nodes":[],
 		  "links":[]
@@ -79,5 +75,11 @@ progtonode.controller('mainController', function($scope ,$http, services){
 			});
 		}
 	};
+
+	if(document.URL.indexOf("id")>0){
+		id_search=document.URL.substring(document.URL.indexOf("id")+3,document.URL.length);
+		$scope.showArtistData(id_search,undefined);
+	}
+
 });
 
