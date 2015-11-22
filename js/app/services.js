@@ -12,7 +12,7 @@ progtonode.factory("services", ['$http', function($http) {
 	 var callback="?callback=JSON_CALLBACK";
 
 	  obj.getArtistInfo=function(artist_id){
-	  	return $http.jsonp(serviceBase+"artists/"+artist_id+callback).success(function(data){
+	  	return $http.jsonp(serviceBase+"artists/"+artist_id+callback+"&key="+key+"&secret="+secret).success(function(data){
 	 			console.log("OK");	
 	      });
 	 	};
@@ -24,7 +24,7 @@ progtonode.factory("services", ['$http', function($http) {
 	  }
 
 	  obj.genericService=function(url){
-	  		return $http.jsonp(url+callback).success(function(data){
+	  		return $http.jsonp(url+callback+"&key="+key+"&secret="+secret).success(function(data){
 	 			console.log("OK");	
 	      });
 	  }

@@ -37,11 +37,22 @@ force
   var node = gnodes.append("circle")
       .attr("class", "node")
       .attr("r", 5)
-      .style("fill", function(d) { return color(d.group); })
+      .style("stroke", function(d) { if(d.group==1) return "#09f"; if(d.group==2) return "#85ED85"; })
       .call(force.drag);
 
+  d3.selectAll("circle.node").on("click", function(){
+        artist_id=graph.nodes[d3.select(this).datum().index].id_discogs;
+        if(artist_id!=0)
+          $('body').scope().showArtistData(artist_id,undefined);
+        });
+
   var labels = gnodes.append("text")
-      .text(function(d) { return d.name; });
+      .text(function(d) { return d.name; })
+      .on("click",function(){
+        artist_id=graph.nodes[d3.select(this).datum().index].id_discogs;
+        if(artist_id!=0)
+          $('body').scope().showArtistData(artist_id,undefined);
+      });
    
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })

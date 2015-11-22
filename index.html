@@ -14,11 +14,13 @@
         rel="stylesheet" type="text/css">
         <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
         <!-- libs -->
         <script type="text/javascript" src="js/lib/angular.min.js"></script>
         <script type="text/javascript" src="js/lib/particles.min.js"></script>
         <script type="text/javascript" src="js/lib/sigma.min.js"></script>
         <script type="text/javascript" src="js/lib/angular-sanitize.js"></script>
+        <script type="text/javascript" src="js/lib/sweetalert.min.js"></script>
         <script src="js/lib/d3.v3.min.js"></script>
 
         <!-- App files -->
@@ -66,11 +68,6 @@
                         <button ng-click="searchArtist(keywordSearch);" class="search-button"><span ng-class="{ 'ion-load-c fa-spin': searching, 'ion-ios-search': searching==false }"></span></button>
                         <br>
                         <br>
-
-
-                         
-
-
                         <center>
                             <ul class="search-results row" ng-show="searchIsDone==true">
                                 <center><p>Results:</p></center>
@@ -209,7 +206,13 @@
                     $(document).ready(function(){
                         var bg=Math.floor((Math.random() * 4) + 1);
                         $(".cover-image,.footer").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover;")
+                    
+                    $("text,circle, graph text").click(function(){
+                        alert("a");
+                    })
+
                     });
+
            </script>
 
     </body>

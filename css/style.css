@@ -1,18 +1,18 @@
 
 a{
-    color:#fff !important;
+		color:#fff !important;
 }
 h1{
-  font-family: 'Megrim', cursive;
+	font-family: 'Megrim', cursive;
 }
 
 .navbar-brand,p,h2,h3,h4, a{
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 400;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 400;
 }
 
 .cover p{
-  font-weight: 400;
+	font-weight: 400;
 }
 
 .main-banner{
@@ -26,19 +26,19 @@ h1{
 }
 
 .btn-primary{
-    border-radius: 0px;
-    background: transparent;
-    border: 1px solid #fff;
+	  border-radius: 0px;
+	  background: transparent;
+	  border: 1px solid #fff;
 }
 
 
 
 .input-search{
-    background: transparent;
-    border: 1px solid rgba(255,255,255,.5);
-    padding: 12px 10px 12px 10px;
-    width: 284px;
-    color: #fff;  
+	  background: transparent;
+	  border: 1px solid rgba(255,255,255,.5);
+	  padding: 12px 10px 12px 10px;
+	  width: 284px;
+	  color: #fff;  
 }
 
 .search-button{
@@ -52,12 +52,12 @@ h1{
 }
 
 .search-button span{
-    position: relative;
-    top: 2px;
+	  position: relative;
+	  top: 2px;
 }
 
 .social{
-  font-size: 31px;
+	font-size: 31px;
   margin-right: 18px;
 }
 
@@ -80,59 +80,59 @@ h1{
 ::-webkit-scrollbar { width: 4px;  height: 4px; background-color: #999;}    
 ::-webkit-scrollbar-track { background-color: #00CCCC;} 
 ::-webkit-scrollbar-track-piece { background-color: #999; } 
-::-webkit-scrollbar-thumb {  background-color: #222;  border: none;} 
+::-webkit-scrollbar-thumb {  background-color: #222;	border: none;} 
 ::-webkit-scrollbar-button:end:increment { display:none;}
 ::-webkit-scrollbar-button:start:decrement{  display:none;}
 ::-webkit-scrollbar-corner {background-color: #999;}
 
 #graph{
-    width: 100%;
+	  width: 100%;
   height: 100vh;
 }
 
 .sigma-mouse{
-  position: relative !important;
+	position: relative !important;
 }
 
 .results-div{
-  background:url('../img/graph.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+	background:url('../img/graph.jpg');
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
 }
 
 .text-primary{
-  font-family: 'Work Sans', sans-serif;
-  font-weight: 200;
-  color:#fff;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 200;
+	color:#fff;
 }
 
 .main-logo{
-  width: 38%;
+	width: 38%;
 }
 .white-info{
-  background: #fefefe;
-  border-radius: 2px;
+	background: #fefefe;
+	border-radius: 2px;
 }
 
 .white-info a{
-  color:#000 !important;
-  font-weight: 700;
+	color:#000 !important;
+	font-weight: 700;
 }
 
 .white-info a:hover{
-  color: #012579 !important;
+	color: #012579 !important;
 }
 
 .artist-description{
-  text-align: justify;
-  font-size: 12px;
+	text-align: justify;
+	font-size: 12px;
 }
 
 .groups-members{
-    list-style: none;
-    text-align: left;
-    padding-left: 17px;
+	  list-style: none;
+	  text-align: left;
+	  padding-left: 17px;
 }
 
 .description-div{
@@ -163,14 +163,14 @@ h1{
 }
 
 .div-description{
-    max-height: 172px;
+	  max-height: 172px;
   overflow-y: auto;
   position: relative;
   right: 12px;
 }
 
 .projects-members{
-    max-height: 39vh;
+	  max-height: 39vh;
   overflow-y: auto;
   position: relative;
   right: 12px;
@@ -182,15 +182,16 @@ h1{
 }
 
 .result-text{
-  margin-top: 0px;
+	margin-top: 0px;
 }
 
 text{
-  fill: white;
+	fill: white;
+	cursor: pointer;
 }
 
 .show-results{
-  top:8vh;
+	top:8vh;
 }
 
 .search-results{
@@ -271,4 +272,8 @@ text{
 .spinner-container{
   height: 88px;
   width: 131px;
+}
+
+.circle{
+  cursor: pointer;
 }
