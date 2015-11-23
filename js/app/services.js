@@ -29,6 +29,12 @@ progtonode.factory("services", ['$http', function($http) {
 	      });
 	  }
 
+	  obj.youtubeService=function(q){
+	  	return $http.get("https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&q="+q+"&type=playlist&key=AIzaSyCLY3rJCKgk2OygEKE2f4ZiGdArRF_dZDE").success(function(data){
+	  		console.log("OK Youtube");
+	  	});
+	  }
+
 /** Motherfucker servicio
 	  obj.getGraph=function(name,groups,level){
 	  	return new Promise(function(resolve,reject){

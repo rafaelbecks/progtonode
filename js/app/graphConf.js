@@ -4,7 +4,7 @@
 function drawGraph(graph){
 d3.select("svg").remove();
 var width = 780,
-    height = 600;
+    height = 500;
 
 var color = d3.scale.category20();
 
@@ -41,17 +41,23 @@ force
       .call(force.drag);
 
   d3.selectAll("circle.node").on("click", function(){
+        index=d3.select(this).datum().index;
         artist_id=graph.nodes[d3.select(this).datum().index].id_discogs;
         if(artist_id!=0)
           $('body').scope().showArtistData(artist_id,undefined);
+        else
+          swal("Sorry", "You are already in this artist", "warning");
         });
 
   var labels = gnodes.append("text")
       .text(function(d) { return d.name; })
       .on("click",function(){
-        artist_id=graph.nodes[d3.select(this).datum().index].id_discogs;
-        if(artist_id!=0)
+        index=d3.select(this).datum().index;
+        artist_id=graph.nodes[index].id_discogs;
+        if(index!=0)
           $('body').scope().showArtistData(artist_id,undefined);
+        else
+          swal("Sorry", "You are already in this artist", "warning");
       });
    
   force.on("tick", function() {

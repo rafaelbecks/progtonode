@@ -4,14 +4,16 @@ Author: Rafael Becerra
 Date: 19/11/2015
 */
 
-progtonode.controller('mainController', function($scope ,$http, services){
+progtonode.controller('mainController', function($scope ,$http, services,$sce){
 
 	$scope.searching=false;
+	$scope.tracking=[];
 	$scope.searchArtist=function(keyword){
 	 graph={
 	  "nodes":[],
 	  "links":[]
  	 };
+ 	 $scope.tracking=[];
 	$(".main-banner").addClass("show-results"); 
 	$scope.searching=true;
 	services.searchMusic(keyword).then(function(data){
@@ -39,7 +41,9 @@ progtonode.controller('mainController', function($scope ,$http, services){
 		$("html, body").animate({ scrollTop: $('#results').offset().top }, 1000);
 		services.getArtistInfo(id).then(function(data){
 			$scope.artistBase=data.data.data;
-			$scope.img_artist=$scope.artistBase.images[0].uri150;
+			$scope.tracking.push({id:id,name:$scope.artistBase.name});
+			if($scope.artistBase.images!=undefined)
+				$scope.img_artist=$scope.artistBase.images[0].uri150;
 			//Build graph in case artist is musician
 			if($scope.artistBase.groups!=undefined)
 				buildGraph($scope.artistBase.name,$scope.artistBase.groups,0);
@@ -47,22 +51,42 @@ progtonode.controller('mainController', function($scope ,$http, services){
 			if($scope.artistBase.members!=undefined)
 				buildGraph($scope.artistBase.name,$scope.artistBase.members,0);				
 			buildProfileText($scope.artistBase.profile);
+			//Fetch youtube data
+			$scope.youtubePlaylist($scope.artistBase.name);
 		});		
 	}
 	};
 
+	$scope.refreshPlayer=function(playlist){
+		$scope.playlist_id_current=playlist;
+	};
+
+
+	$scope.youtubePlaylist=function(q){
+		services.youtubeService(q).then(function(data){
+				$scope.playlist_id="https://www.youtube.com/embed/videoseries?list="+data.data.items[0].id.playlistId;
+				if($scope.playlist_id_current==undefined)
+					$scope.refreshPlayer($scope.playlist_id);
+		});
+	}
 
 	buildGraph=function(name,groups,level){
 		graph.nodes.push({"name":name,"group":1});
 		for(var i=0;i<groups.length; i++){
-			console.log(groups[i]);
 			if(groups[i].active)
 				graph.nodes.push({"name":groups[i].name,"group":1,"id_discogs":groups[i].id});
 			else
 				graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
-			graph.links.push({"source":0,"target":i+1,"value":1});
+				//Links
+				graph.links.push({"source":0,"target":i+1,"value":1});
+				obj.genericService(groups[i].resource_url).then(function(data){
+					for(var j=0;j<data.data.data.length;j++){
+						
+					}					
+				});
+
+			
 		}
-		console.log(graph);
 		drawGraph(graph);
 	};
 
@@ -80,6 +104,10 @@ progtonode.controller('mainController', function($scope ,$http, services){
 		id_search=document.URL.substring(document.URL.indexOf("id")+3,document.URL.length);
 		$scope.showArtistData(id_search,undefined);
 	}
+
+	$scope.trustSrc = function(src) {
+    return $sce.trustAsResourceUrl(src);
+  }
 
 });
 

@@ -42,7 +42,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><span>ProgToNode</span></a>
+                        <a class="navbar-brand" href="#"><img src="img/proglogo.png" class="logo"><span>ProgToNode</span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -131,22 +131,37 @@
                                         </div>
                                     </div>
                                     <div class="buttons">
+                                        <button class="btn info-buttons"><i class="ion-network"></i>&nbsp;&nbsp;Journey</button>
                                         <button class="btn info-buttons"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
-                                        <button class="btn info-buttons"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</buttonn>                                    
+                                        <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#myModal"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</buttonn>                                    
                                     </div>
                                 </div>
                             </div>
                             </div>
+                            <div ng-if="tracking.length>1" id="wizard" class="form_wizard wizard_horizontal">
+                                    <ul class="wizard_steps anchor">
+                                        <li ng-repeat="track in tracking">
+                                            <a href="#step-1" class="done" isdone="1" rel="1">
+                                                <span class="step_no">{{$index+1}}</span>
+                                        <small>{{track.name}}</small>
+                                    </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                        
+                                </div>
                         </center>
-                        
                     </div>
                 </div>
+
             </div>
         </div>
+
         <div class="section">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
+
                         <h1 class="text-primary">How it works?</h1>
                         <h3>Aquí se explica como funciona</h3>
                         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
@@ -196,6 +211,29 @@
                     </div>
                 </div>
             </div>
+
+            <div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Listen some {{artistBase.name}} music</h4>
+      </div>
+      <div ng-if="playlist_id!=undefined" class="modal-body">
+       <iframe width="560" height="315" ng-src="{{trustSrc(playlist_id_current)}}" frameborder="0" allowfullscreen></iframe>
+      </div>
+      <center><button ng-click="refreshPlayer(playlist_id)" type="button" class="btn btn-default"><span class="ion-ios-refresh-empty"></span>&nbsp;Refresh to current artists</button></center>
+      </br>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="ion-ios-close-outline"></span>&nbsp;&nbsp;Close</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>
         </footer>
             <script>
                     particlesJS.load('particles-js', 'particles.json', function() {
@@ -207,6 +245,7 @@
                         var bg=Math.floor((Math.random() * 4) + 1);
                         $(".cover-image,.footer").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover;")
                     
+ 
                     $("text,circle, graph text").click(function(){
                         alert("a");
                     })
