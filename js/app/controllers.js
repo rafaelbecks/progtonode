@@ -79,13 +79,6 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 				graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
 				//Links
 				graph.links.push({"source":0,"target":i+1,"value":1});
-				obj.genericService(groups[i].resource_url).then(function(data){
-					for(var j=0;j<data.data.data.length;j++){
-						
-					}					
-				});
-
-			
 		}
 		drawGraph(graph);
 	};
