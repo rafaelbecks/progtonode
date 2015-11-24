@@ -102,5 +102,8 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
     return $sce.trustAsResourceUrl(src);
   }
 
+  $scope.emptyTrack=function(){
+  	 $scope.tracking=[];
+  }
 });
 

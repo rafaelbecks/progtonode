@@ -71,7 +71,7 @@
                         <center>
                             <ul class="search-results row" ng-show="searchIsDone==true">
                                 <center><p>Results:</p></center>
-                                <li ng-click="showArtistData(res.id,res.thumb);" ng-repeat="res in results" class="col-md-6" ng-if="$index<=7">
+                                <li ng-click="emptyTrack(); showArtistData(res.id,res.thumb);" ng-repeat="res in results" class="col-md-6" ng-if="$index<=7">
                                 <img class="search-thumb" ng-src="{{res.thumb}}">
                                 {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}</li>
                             </ul>                            
@@ -81,7 +81,9 @@
             </center>
         </div>
         <div class="section results-div" id="results">
-            <div class="container">
+
+        </div>
+            <div class="container content-results">
                 <div class="row">
                     <div class="col-md-12">
                         <center>
@@ -155,8 +157,6 @@
                 </div>
 
             </div>
-        </div>
-
         <div class="section">
             <div class="container">
                 <div class="row">
@@ -242,13 +242,18 @@
 
                    
                     $(document).ready(function(){
-                        var bg=Math.floor((Math.random() * 4) + 1);
-                        $(".cover-image,.footer").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover;")
-                    
+                        var bg=Math.floor((Math.random() * 9) + 1);
+                        $(".cover-image,.footer,.results-div").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover; background-attachment: fixed;");
  
                     $("text,circle, graph text").click(function(){
                         alert("a");
                     })
+
+                    $(window).on('scroll', function () {
+                        var pixs = $(document).scrollTop()
+                        pixs = pixs / 100;
+                        $(".results-div,.cover-image").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" })     
+                    });
 
                     });
 

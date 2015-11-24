@@ -95,10 +95,8 @@ h1{
 }
 
 .results-div{
-	background:url('../img/graph.jpg');
-	background-size: cover;
-	background-position: center;
-	height: 100vh;
+	height: 110vh;
+transform: scale(1.1)
 }
 
 .text-primary{
@@ -369,4 +367,16 @@ text{
     width: 5%;
     display: inline-block !important;
     margin-right: 9px;
+}
+
+.content-results{
+    height: 100vh;
+  position: absolute;
+  top: 100vh;
+  left: 8vw;
+}
+
+.cover-image{
+  height: 110vh;
+  transform: scale(1.1);
 }
