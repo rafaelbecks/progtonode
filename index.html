@@ -42,15 +42,12 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="img/proglogo.png" class="logo"><span>ProgToNode</span></a>
+                        <a class="navbar-brand" href="#"><img src="img/proglogo.png" class="logo"><span><strong>PROG</strong>TO<strong>NODE</strong></span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active">
-                                <a href="#">How it works?</a>
-                            </li>
-                            <li class="active">
-                                <a href="#">About</a>
+                                <a href="#"><span class="ion-navicon navicon"></span></a>
                             </li>
 
                         </ul>
@@ -86,9 +83,7 @@
             <div class="container content-results">
                 <div class="row">
                     <div class="col-md-12">
-                        <center>
-                            <h2 class="text-primary result-text">Results</h2>
-                        
+                        <center>                        
                             <div class="results container">
                             <div class="row">
                                 <div class="col-md-8">
@@ -98,7 +93,7 @@
                                     <h3>{{artistBase.name}}</h3>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <img ng-src="{{img_artist}}">
+                                            <img ng-click="buildG();" ng-src="{{img_artist}}">
                                         </div>    
                                         <div class="col-md-6 div-description">
                                             <p class="artist-description" ng-bind-html="artistBase.profile"></p>
@@ -135,8 +130,9 @@
                                     <div class="buttons">
                                         <button class="btn info-buttons"><i class="ion-network"></i>&nbsp;&nbsp;Journey</button>
                                         <button class="btn info-buttons"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
-                                        <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#myModal"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</buttonn>                                    
+                                        <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#myModal"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
                                     </div>
+                                    <span><strong>Build Progress:</strong> {{percentaje | limitTo: 5}}  <strong>Step:</strong> {{porc | limitTo: 5}}</span>
                                 </div>
                             </div>
                             </div>
@@ -157,31 +153,6 @@
                 </div>
 
             </div>
-        <div class="section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <h1 class="text-primary">How it works?</h1>
-                        <h3>Aquí se explica como funciona</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-                            ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-                            dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-                            nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-                            Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-                            enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-                            felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-                            elementum semper nisi.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <img src="img/demo.gif"
-                        class="img-responsive">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <footer class="section section-primary footer">
             <div class="container">
                 <div class="row">
@@ -251,8 +222,8 @@
 
                     $(window).on('scroll', function () {
                         var pixs = $(document).scrollTop()
-                        pixs = pixs / 100;
-                        $(".results-div,.cover-image").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" })     
+                        pixs = pixs / 80;
+                        $(".results-div,.cover-image, .footer").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" });
                     });
 
                     });

@@ -6,6 +6,7 @@ Date: 19/11/2015
 
 progtonode.controller('mainController', function($scope ,$http, services,$sce){
 
+	$scope.percentaje=0;
 	$scope.searching=false;
 	$scope.tracking=[];
 	$scope.searchArtist=function(keyword){
@@ -45,11 +46,15 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 			if($scope.artistBase.images!=undefined)
 				$scope.img_artist=$scope.artistBase.images[0].uri150;
 			//Build graph in case artist is musician
-			if($scope.artistBase.groups!=undefined)
-				buildGraph($scope.artistBase.name,$scope.artistBase.groups,0);
+			if($scope.artistBase.groups!=undefined){
+				//buildGraph($scope.artistBase.name,$scope.artistBase.groups,0);
+				buildGraph2nd($scope.artistBase.name,$scope.artistBase.groups,0);
+			}
 			//Build graph in case artist is band/project
-			if($scope.artistBase.members!=undefined)
-				buildGraph($scope.artistBase.name,$scope.artistBase.members,0);				
+			if($scope.artistBase.members!=undefined){
+				//buildGraph($scope.artistBase.name,$scope.artistBase.members,0);								
+				buildGraph2nd($scope.artistBase.name,$scope.artistBase.members,0);				
+			}
 			buildProfileText($scope.artistBase.profile);
 			//Fetch youtube data
 			$scope.youtubePlaylist($scope.artistBase.name);
@@ -80,8 +85,67 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 				//Links
 				graph.links.push({"source":0,"target":i+1,"value":1});
 		}
-		drawGraph(graph);
 	};
+
+
+	buildGraph2nd=function(name,groups,level){
+		found=false;
+		$scope.percentaje=0;
+		$scope.porc=100/groups.length;
+		graph.nodes.push({"name":name,"group":1});
+		for(var i=0;i<groups.length; i++){
+			if(groups[i].active)
+				graph.nodes.push({"name":groups[i].name,"group":1,"id_discogs":groups[i].id});
+			else
+				graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
+				//Links
+				graph.links.push({"source":0,"target":i+1,"value":1});
+			services.genericService(groups[i].resource_url).then(function(data){
+			$scope.percentaje=$scope.percentaje+$scope.porc;
+				if(i==groups.length){
+					console.log("Ultima vuelta")
+				}
+				indexOrigin=0;
+				if(data.data.data.members!=undefined)
+					groupsOfNodes=data.data.data.members;
+				if(data.data.data.groups!=undefined)
+					groupsOfNodes=data.data.data.groups;
+					for(var j=0;j<groupsOfNodes.length;j++){
+						searchResults=[];
+						for(k=0;k<graph.nodes.length;k++){
+							//Delete repetitions and find origin
+							//console.log(groupsOfNodes[j].name+"="+graph.nodes[k].name);
+							if(groupsOfNodes[j].name==graph.nodes[k].name)
+								searchResults.push(true);
+							else
+								searchResults.push(false);
+							console.log(data.data.data.name+"="+graph.nodes[k].name);
+							if(data.data.data.name==graph.nodes[k].name){
+								indexOrigin=k;
+								console.log(indexOrigin);
+							}
+						}							
+						if(searchResults.indexOf(true)==-1){
+						if(groupsOfNodes[j].name!=graph.nodes[0].name){	
+							if(groupsOfNodes[j].active)
+								graph.nodes.push({"name":groupsOfNodes[j].name,"group":1,"id_discogs":groupsOfNodes[j].id});
+							else
+								graph.nodes.push({"name":groupsOfNodes[j].name,"group":2,"id_discogs":groupsOfNodes[j].id});							
+						}
+							graph.links.push({"source":indexOrigin,"target":graph.nodes.length-1,"value":1});
+
+							console.log(i+" AND LENGTH="+groups.length);
+							console.log(j+" AND LENGTH="+groupsOfNodes.length);
+							console.log(graph);							
+						}
+					}
+			});
+		}
+		};
+
+	$scope.buildG=function(){
+		drawGraph(graph);
+	}
 
 	buildProfileText=function(bio){
 		if(bio.indexOf("[a")>0){

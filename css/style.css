@@ -380,3 +380,20 @@ text{
   height: 110vh;
   transform: scale(1.1);
 }
+
+.cover .navbar{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    border: none;
+    background-color: rgba(0,0,0,.5) !important;
+    z-index: 100;
+}
+
+.navicon{
+  font-size: 27px;
+}
+
+.navbar-nav > li > a {
+  padding-top: 10px;
+}
