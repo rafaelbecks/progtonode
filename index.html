@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                 <div ng-if="loading==true" class="loader"><span class="ion-load-c fa-spin"></span>
-                                <p>Building graph</p>
+                                <p>Building graph ({{percentaje | limitTo: 5}}%)</p>
                                 </div>
                                     <graph></graph>
                                 </div>
@@ -139,7 +139,7 @@
                                         <button class="btn info-buttons"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
                                         <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#myModal"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
                                     </div>
-                                    <span><strong>Build Progress:</strong> {{percentaje | limitTo: 5}}  <strong>Step:</strong> {{porc | limitTo: 5}}</span>
+                                    
                                 </div>
                             </div>
                             </div>
@@ -190,7 +190,8 @@
                 </div>
             </div>
 
-            <div id="myModal" class="modal fade" role="dialog">
+        </footer>
+<div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -212,8 +213,6 @@
 
   </div>
 </div>
-        </footer>
-
             <script>
                     particlesJS.load('particles-js', 'particles.json', function() {
                       console.log('callback - particles.js config loaded');
