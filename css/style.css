@@ -1,5 +1,7 @@
-
-a{
+body{
+  overflow-x:hidden; 
+}
+a,.copy{
 		color:#fff !important;
 }
 h1{
@@ -376,12 +378,17 @@ text{
   left: 8vw;
 }
 
-.cover-image{
-  height: 110vh;
-  transform: scale(1.1);
+.container_single_page{
+transform: scale(1.05,1.05);
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
-.cover .navbar{
+.navbar{
     position: fixed;
     top: 0px;
     width: 100%;
@@ -396,4 +403,26 @@ text{
 
 .navbar-nav > li > a {
   padding-top: 10px;
+}
+
+footer{
+  background: transparent;
+}
+
+.results-div,.cover,.content-results,footer{
+  z-index: 2;
+}
+
+.menu a:hover{
+background:transparent !important;
+}
+
+.loader{
+  color:#fff;
+  color: #fff;
+  margin-top: 156px;
+}
+.loader span{
+  color: #fff;
+  font-size: 60px;
 }
