@@ -5,10 +5,10 @@ Date: 19/11/2015
 */
 
 progtonode.controller('mainController', function($scope ,$http, services,$sce){
-    $scope.loading = true;
+    $scope.loading = false;
 
 	$scope.$watch("percentaje", function (newValue, oldValue ) {
-    if(newValue>80){
+    if(newValue>=80){
     	setTimeout(function(){
     		$scope.buildG();
     	},1500);
@@ -40,6 +40,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
+	$scope.loading = true;
 	location.href="#id="+id;
 		 graph={
 		  "nodes":[],
