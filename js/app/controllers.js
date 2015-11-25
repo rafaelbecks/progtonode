@@ -5,8 +5,7 @@ Date: 19/11/2015
 */
 
 progtonode.controller('mainController', function($scope ,$http, services,$sce){
-    $scope.loading = false;
-
+	
 	$scope.$watch("percentaje", function (newValue, oldValue ) {
     if(newValue>=80){
     	setTimeout(function(){
@@ -50,7 +49,8 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 			$scope.img_artist=thumb;
 	 	 //jQuery way to animate scroll to results, must find angular way
 		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
-		 $scope.loading=true;
+		$("graph").hide();
+		$(".loader").show();
 		services.getArtistInfo(id).then(function(data){
 			$scope.artistBase=data.data.data;
 			$scope.tracking.push({id:id,name:$scope.artistBase.name});
@@ -155,9 +155,9 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 		};
 
 	$scope.buildG=function(){
-		$scope.loading=false;
-		drawGraph(graph);
 		$(".loader").hide();
+		$("graph").show();
+		drawGraph(graph);
 	}
 
 	buildProfileText=function(bio){

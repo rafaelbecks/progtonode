@@ -33,17 +33,14 @@
     
     <body ng-controller="mainController">
 
+    <nav>
+        
+    </nav>
     <div class="container_single_page">
     </div>
             <div class="navbar">
                 <div class="container">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
                         <a class="navbar-brand" href="#"><img src="img/proglogo.png" class="logo"><span><strong>PROG</strong>TO<strong>NODE</strong></span></a>
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-ex-collapse">
@@ -51,7 +48,6 @@
                             <li class="menu">
                                 <a href="#"><span class="ion-navicon navicon"></span></a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -91,7 +87,8 @@
                             <div class="results container">
                             <div class="row">
                                 <div class="col-md-8">
-                                <div ng-if="loading==true" class="loader"><span class="ion-load-c fa-spin"></span>
+                                <div class="loader">
+                                <div id="particles-loading"></div>
                                 <p>Building graph ({{percentaje | limitTo: 5}}%)</p>
                                 </div>
                                     <graph></graph>
@@ -213,26 +210,36 @@
 
   </div>
 </div>
-            <script>
-                    particlesJS.load('particles-js', 'particles.json', function() {
-                      console.log('callback - particles.js config loaded');
-                    });
+        <script>
+                particlesJS.load('particles-js', 'particles.json', function() {
+                  console.log('callback - particles.js config loaded');
+                });
 
-                   
-                    $(document).ready(function(){
-                        var bg=Math.floor((Math.random() * 13) + 1);
-                        $(".container_single_page").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover; background-attachment: fixed;");
+                particlesJS.load('particles-loading',"particles-loading.json",function(){
+                    if(document.URL.indexOf("id")==-1){   
+                      $(".loader").hide();
+                     }
+                });
+
+               
+                $(document).ready(function(){
+                    var bg=Math.floor((Math.random() * 13) + 1);
+                    $(".container_single_page").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover; background-attachment: fixed;");
 
 
-                    $(window).on('scroll', function () {
-                        var pixs = $(document).scrollTop()
-                        pixs = pixs / 120;
-                        $(".container_single_page").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" });
-                    });
+                $(window).on('scroll', function () {
+                    var pixs = $(document).scrollTop()
+                    pixs = pixs / 120;
+                    $(".container_single_page").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" });
+                });
 
-                    });
+                });
 
-           </script>
+                $(".menu").click(function(){
+                    $("body").toggleClass("open");
+                });
+
+       </script>
 
     </body>
 
