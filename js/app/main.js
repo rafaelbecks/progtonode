@@ -8,7 +8,7 @@ if(document.URL.indexOf("#")==-1){
   location.href="#/";
 }
 
-var progtonode=angular.module('progtonode',['ngSanitize','rzModule','monospaced.mousewheel','panzoom']);
+var progtonode=angular.module('progtonode',['ngSanitize','rzModule']);
 
 progtonode.directive('ngEnter', function () {
     return function (scope, element, attrs) {
