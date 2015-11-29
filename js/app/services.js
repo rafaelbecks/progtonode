@@ -29,7 +29,16 @@ progtonode.factory("services", ['$http', function($http) {
 	      });
 	  }
 
+	  obj.releaseService=function(url,n){
+	  		return $http.jsonp(url+callback+"&key="+key+"&secret="+secret+"&per_page="+n).success(function(data){
+	 			console.log("OK");	
+	      });
+	  };
+
 	  obj.youtubeService=function(q){
+	  	if(q.indexOf("(")>=0){
+	  		q=q.substring(0,q.indexOf("("))+" prog";
+	  	}
 	  	return $http.get("https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&q="+q+"&type=playlist&key=AIzaSyCLY3rJCKgk2OygEKE2f4ZiGdArRF_dZDE").success(function(data){
 	  		console.log("OK Youtube");
 	  	});

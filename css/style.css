@@ -117,8 +117,11 @@ transform: scale(1.1)
 	width: 38%;
 }
 .white-info{
-	background: #fefefe;
-	border-radius: 2px;
+  background: #fefefe;
+  border-radius: 2px;
+  position: relative;
+  left: 32px;
+  top: 14px;
 }
 
 .white-info a{
@@ -176,7 +179,7 @@ transform: scale(1.1)
 }
 
 .projects-members{
-	  max-height: 39vh;
+	  max-height: 27vh;
   overflow-y: auto;
   position: relative;
   right: 12px;
@@ -194,6 +197,7 @@ transform: scale(1.1)
 text{
 	fill: white;
 	cursor: pointer;
+  font-size: 12px;
 }
 
 .show-results{
@@ -381,7 +385,7 @@ text{
     height: 100vh;
   position: absolute;
   top: 100vh;
-  left: 8vw;
+  width:100%;
 }
 
 .container_single_page{
@@ -469,4 +473,132 @@ nav{
   width: 260px;
   height: 200px;
   margin-bottom: 36px;
+}
+
+.manual-button{
+    border: 1px solid rgba(255,255,255,.5);
+  padding: 9px 14px 9px 14px;
+  background: transparent;
+}
+
+.album-thumb{
+  width: 90px;
+  height: 90px;
+  margin-bottom: 4px;
+  margin-top: 9px;
+}
+
+.onoffswitch {
+    display: inline-block;
+    position: relative; width: 53px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 24px; padding: 0; line-height: 24px;
+    border: 2px solid #CCCCCC; border-radius: 24px;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 24px; margin: 0px;
+    background: #fff;
+    position: absolute; top: 0; bottom: 5px;
+    right: 28px;
+    border: 2px solid #CCCCCC; border-radius: 24px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked {
+    background-color: #transparent;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: #transparent;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px; 
+}
+
+.label-span{
+      position: relative;
+      bottom: 13px;
+      right: 7px;
+}
+
+.controls{
+  margin-top: 15px;
+  color: #fff;
+  text-align: center;
+  background: rgba(0,0,0,.6);
+  position: absolute;
+  width: 380px;
+  border-radius: 3px;
+  padding-top: 9px;
+  right: 5vw;
+  top: 73vh;
+  padding-left: 14px;
+  cursor: move;
+  border: 1px solid rgba(255,255,255,.1);
+}
+
+.controls .full-screen{
+  font-size: 24px;
+  position: relative;
+  right: 0;
+  bottom: 9px;
+  left: 8px;
+  color: #ccc;
+  cursor: pointer;
+   -webkit-transition: all 0.5s ease-in-out;
+ -moz-transition: all 0.5s ease-in-out;
+ -o-transition: all 0.5s ease-in-out;
+ transition: all 0.5s ease-in-out;
+}
+
+.controls .full-screen:hover{
+  color:#fff;
+}
+
+.sweet-alert p {
+  font-weight: 500 !important;
+}
+
+.sliderContainer{
+    width: 150px;
+  margin-right: 0;
+  display: inline-block;
+}
+
+rzslider {
+  position: relative !important;
+  display: inline-block !important;
+  width: 100% !important;
+  height: 4px !important;
+  margin: -9px 0px 15px 13px !important;
+  vertical-align: middle !important;
+  -webkit-user-select: none !important;
+}
+
+rzslider .rz-bubble {
+  display: none !important;
+}
+
+rzslider .rz-pointer {
+  top: -8px !important;
+  z-index: 3 !important;
+  width: 20px !important;
+  height: 20px !important;
+  cursor: pointer !important;
+  background-color: #fff !important;
+  -webkit-border-radius: 16px !important;
+  -moz-border-radius: 16px !important;
+  border-radius: 16px !important;
+}
+
+rzslider .rz-pointer:after{
+  content:'' !important;
+  display: none;
 }

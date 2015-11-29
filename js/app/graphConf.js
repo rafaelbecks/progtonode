@@ -3,8 +3,8 @@
 
 function drawGraph(graph){
 d3.select("svg").remove();
-var width = 780,
-    height = 500;
+var width = 800,
+    height = 600;  
 
 var color = d3.scale.category20();
 
@@ -15,6 +15,7 @@ var force = d3.layout.force()
 
 var svg = d3.select("graph").append("svg")
     .attr("width", width)
+    .attr("id","graphSVG")
     .attr("height", height);
 
 force
@@ -50,7 +51,8 @@ force
         });
 
   var labels = gnodes.append("text")
-      .text(function(d) { return d.name; })
+      .attr("id",function(d) { return d.id_discogs})
+      .text(function(d) { return "\u00A0 \u00A0 \u00A0"+d.name; })
       .on("click",function(){
         index=d3.select(this).datum().index;
         artist_id=graph.nodes[index].id_discogs;
@@ -59,7 +61,7 @@ force
         else
           swal("Sorry", "You are already in this artist", "warning");
       });
-   
+   $("text").attr("dominant-baseline","before-edge");
   force.on("tick", function() {
     link.attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
