@@ -20,7 +20,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 });
 
 	emptyGraph=function(){
-		 graph={
+		 $scope.graph={
 		  "nodes":[],
 		  "links":[]
 	 	 };
@@ -45,7 +45,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	};
 
 	$scope.searchArtist=function(keyword){
-	 graph={
+	 $scope.graph={
 	  "nodes":[],
 	  "links":[]
  	 };
@@ -66,7 +66,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	$scope.afterSearch=true;
 	$scope.loading = true;
 	location.href="#id="+id;
-		 graph={
+		 $scope.graph={
 		  "nodes":[],
 		  "links":[]
 	 	 };
@@ -144,14 +144,14 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	};
 
 	buildGraph=function(name,groups,mainId){
-		graph.nodes.push({"name":name,"group":1,"id_discogs":mainId});
+		$scope.graph.nodes.push({"name":name,"group":1,"id_discogs":mainId});
 		for(var i=0;i<groups.length; i++){
 			if(groups[i].active)
-				graph.nodes.push({"name":groups[i].name,"group":1,"id_discogs":groups[i].id});
+				$scope.graph.nodes.push({"name":groups[i].name,"group":1,"id_discogs":groups[i].id});
 			else
-				graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
+				$scope.graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
 				//Links
-				graph.links.push({"source":0,"target":i+1,"value":1});
+				$scope.graph.links.push({"source":0,"target":i+1,"value":1});
 		}
 		$scope.buildG();
 	};
@@ -161,14 +161,14 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 		found=false;
 		$scope.percentaje=0;
 		$scope.porc=100/groups.length;
-		graph.nodes.push({"name":name,"group":1,"id_discogs":mainId});
+		$scope.graph.nodes.push({"name":name,"group":1,"id_discogs":mainId});
 		for(var i=0;i<groups.length; i++){
 			if(groups[i].active)
-				graph.nodes.push({"name":groups[i].name,"group":1,"id_discogs":groups[i].id});
+				$scope.graph.nodes.push({"name":groups[i].name,"group":1,"id_discogs":groups[i].id});
 			else
-				graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
+				$scope.graph.nodes.push({"name":groups[i].name,"group":2,"id_discogs":groups[i].id});
 				//Links
-				graph.links.push({"source":0,"target":i+1,"value":1});
+				$scope.graph.links.push({"source":0,"target":i+1,"value":1});
 			services.genericService(groups[i].resource_url).then(function(data){
 			$scope.percentaje=$scope.percentaje+$scope.porc;
 				indexOrigin=0;
@@ -178,25 +178,25 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 					groupsOfNodes=data.data.data.groups;
 					for(var j=0;j<groupsOfNodes.length;j++){
 						searchResults=[];
-						for(k=0;k<graph.nodes.length;k++){
+						for(k=0;k<$scope.graph.nodes.length;k++){
 							//Delete repetitions and find origin
-							//console.log(groupsOfNodes[j].name+"="+graph.nodes[k].name);
-							if(groupsOfNodes[j].name==graph.nodes[k].name)
+							//console.log(groupsOfNodes[j].name+"="+$scope.graph.nodes[k].name);
+							if(groupsOfNodes[j].name==$scope.graph.nodes[k].name)
 								searchResults.push(true);
 							else
 								searchResults.push(false);
-							if(data.data.data.name==graph.nodes[k].name){
+							if(data.data.data.name==$scope.graph.nodes[k].name){
 								indexOrigin=k;
 							}
 						}							
 						if(searchResults.indexOf(true)==-1){
-						if(groupsOfNodes[j].name!=graph.nodes[0].name){	
+						if(groupsOfNodes[j].name!=$scope.graph.nodes[0].name){	
 							if(groupsOfNodes[j].active)
-								graph.nodes.push({"name":groupsOfNodes[j].name,"group":1,"id_discogs":groupsOfNodes[j].id});
+								$scope.graph.nodes.push({"name":groupsOfNodes[j].name,"group":1,"id_discogs":groupsOfNodes[j].id});
 							else
-								graph.nodes.push({"name":groupsOfNodes[j].name,"group":2,"id_discogs":groupsOfNodes[j].id});							
+								$scope.graph.nodes.push({"name":groupsOfNodes[j].name,"group":2,"id_discogs":groupsOfNodes[j].id});							
 						}
-							graph.links.push({"source":indexOrigin,"target":graph.nodes.length-1,"value":1});
+							$scope.graph.links.push({"source":indexOrigin,"target":$scope.graph.nodes.length-1,"value":1});
 
 						}
 					}
@@ -226,7 +226,8 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	$scope.buildG=function(){
 		$(".loader").hide();
 		$("graph").show();
-		drawGraph(graph);
+		drawGraph($scope.graph);
+		console.log($scope.graph);
 	}
 
 	buildProfileText=function(bio){

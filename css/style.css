@@ -122,6 +122,21 @@ transform: scale(1.1)
   position: relative;
   left: 32px;
   top: 14px;
+  padding:0;
+}
+
+.info-artist{
+    padding: 14px 10px 0 10px;
+}
+
+.card-background{
+  background: url("../img/cardback.jpg");
+  background-size: cover;
+  color:#fff !important;
+}
+
+.staticon{
+  font-size: 28px;
 }
 
 .white-info a{
@@ -136,6 +151,11 @@ transform: scale(1.1)
 .artist-description{
 	text-align: justify;
 	font-size: 12px;
+  max-height: 99px;
+  overflow-y: auto;
+  margin: 0 8px 8px 0;
+  padding-right: 5px;
+  font-size: 12px;
 }
 
 .groups-members{
@@ -201,7 +221,7 @@ text{
 }
 
 .show-results{
-	top:8vh;
+	top:10vh;
 }
 
 .search-results{
@@ -601,4 +621,9 @@ rzslider .rz-pointer {
 rzslider .rz-pointer:after{
   content:'' !important;
   display: none;
+}
+
+.level-label{
+    position: relative;
+  bottom: 4px;
 }

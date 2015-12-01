@@ -102,15 +102,30 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4 white-info" ng-if="afterSearch==true">
-                                    <h3>{{artistBase.name}}</h3>
+                                <div class="card-background">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <img ng-click="buildG();" ng-src="{{img_artist}}">
-                                        </div>    
-                                        <div class="col-md-6 div-description">
-                                            <p class="artist-description" ng-bind-html="artistBase.profile"></p>
+                                        </div>
+                                        <div class="col-md-8">                                    
+                                        <h3>{{artistBase.name}}</h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <span class="staticon ion-network"></span>
+                                            <p>{{graph.nodes.length}} nodes</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                            <span class="staticon ion-merge"></span>
+                                            <p>{{graph.links.length}} links</p>
+                                            </div>
+                                        </div>
+                                        <span lass="level-label"><strong>Level:</strong> Astral graph</span>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="info-artist">
+                                    <p class="artist-description" ng-bind-html="artistBase.profile"></p>                                    
                                     <div ng-if="artistBase.groups!=undefined " class="row projects-members">
                                         <div class="col-md-6">
                                             <h4>Active Projects</h4>
@@ -125,6 +140,7 @@
                                             </ul>
                                         </div>
                                     </div>
+
                                     <div ng-if="artistBase.members!=undefined" class="row projects-members">
                                         <div class="col-md-6">
                                             <h4>Current members</h4>
@@ -139,15 +155,19 @@
                                             </ul>
                                         </div>
                                     </div>
-
                                     <div class="buttons">
                                         <button class="btn info-buttons" data-toggle="tooltip" title="Show your road graph"><i class="ion-network"></i>&nbsp;&nbsp;Journey</button>
                                         <button ng-click="getReleases(artistBase.releases_url,artistBase.name);" class="btn info-buttons" data-toggle="modal" data-toggle="tooltip" title="Show albums" data-target="#modalAlbums"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
                                         <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#modalYoutube"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
                                     </div>
+                                </div>
+
                                     
                                 </div>
 
+
+
+                                    </div>
                                 <div class="controls" ng-show="afterSearch==true">
                                     <span class="label-span">Controls</span>
                                         <div class="onoffswitch" data-toggle="tooltip" title="Expanded">

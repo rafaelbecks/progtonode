@@ -10,7 +10,7 @@
 
                
                 $(document).ready(function(){
-                    var bg=Math.floor((Math.random() * 14) + 1);
+                    var bg=Math.floor((Math.random() * 13) + 1);
                     $(".container_single_page").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover; background-attachment: fixed;");
 
 
