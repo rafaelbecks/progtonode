@@ -627,3 +627,70 @@ rzslider .rz-pointer:after{
     position: relative;
   bottom: 4px;
 }
+
+.videos-circle{
+    width: 80px;   
+    height: 80px;   border-radius: 74px;   background: #3535B8;   position: relative;   
+    left: 35px;
+    bottom: 22px;
+    padding-top: 12px;
+    color: #fff;
+}
+
+.info-circle{
+    width: 80px;   
+    height: 80px;   border-radius: 74px;   background: #3535B8;
+    position: relative;
+    left: 72px;
+    padding-top: 12px;
+    color: #fff;
+    margin-top:17px;
+
+}
+.videos-circle span,.info-circle span,.album-circle span,.another-circle span{
+    color: #fff;
+    position: relative;
+    font-size: 23px;
+}
+.videos-circle p,.info-circle p,.album-circle p{
+    margin: 0;
+    color:#fff;
+    position: relative;
+    bottom: 5px;
+}
+
+.album-circle{
+    width: 70px;   height: 70px;   border-radius: 74px;   background: #3535B8;   position: relative;   
+    /* top: 20px; */
+    position: relative;
+    left: -65px;
+    padding-top:8px;
+}
+
+.another-circle{
+    width: 70px;
+    height: 70px;
+    border-radius: 74px;
+    background: #3535B8;
+    position: relative;
+    top: 20px;
+}
+
+.name-artist{
+      margin: 0;
+    font-size: 19px;
+    margin-top: 5px;
+
+}
+
+.graphDrag{
+  width: 800px;
+  height: 600px;
+  max-width: 800px;
+  max-height: 600px;
+}
+
+.nodeBig{
+  stroke-width : 17px;
+  stroke: rgb(52, 255, 15) !important;
+}

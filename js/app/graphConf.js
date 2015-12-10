@@ -38,6 +38,7 @@ force
   var node = gnodes.append("circle")
       .attr("class", "node")
       .attr("r", 5)
+      .attr("id",function(){ return "circle-"+graph.nodes[d3.select(this).datum().index].id_discogs;})
       .style("stroke", function(d) { if(d.group==1) return "#09f"; if(d.group==2) return "#85ED85"; })
       .call(force.drag);
 

@@ -22,7 +22,8 @@
 
                 $('[data-toggle="tooltip"]').tooltip(); 
                  $( ".controls,.graphDrag" ).draggable({ scroll: false});
-                });
+
+                  });
 
 
 function toggleFullScreen() {
@@ -50,3 +51,16 @@ function toggleFullScreen() {
     }
   }
 }            
+
+
+function bigGraph(id){
+  circle='#circle-'+id.substring(5,id.length);
+  color=$(circle).attr("style").substring($(circle).attr("style").indexOf("stroke")+7,$(circle).attr("style").length-1);
+  $(circle).attr("style","stroke-width : 17px; stroke:"+color);
+}
+
+function normalGraph(id){
+  circle='#circle-'+id.substring(5,id.length);
+  color=$(circle).attr("style").substring($(circle).attr("style").indexOf("stroke")+7,$(circle).attr("style").length-1);
+  $(circle).attr("style","stroke-width : 5px; stroke:"+color);
+}

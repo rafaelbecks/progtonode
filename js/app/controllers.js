@@ -60,6 +60,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	};
 
 	$scope.showArtistData=function(id,thumb){
+	$scope.percentaje=0;
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
@@ -159,6 +160,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 
 	buildGraph2nd=function(name,groups,mainId){
 		found=false;
+		relations=[]; // Array to save the relationships of repetitions
 		$scope.percentaje=0;
 		$scope.porc=100/groups.length;
 		$scope.graph.nodes.push({"name":name,"group":1,"id_discogs":mainId});
@@ -177,16 +179,21 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 				if(data.data.data.groups!=undefined)
 					groupsOfNodes=data.data.data.groups;
 					for(var j=0;j<groupsOfNodes.length;j++){
-						searchResults=[];
+						searchResults=[]; //Array to determinate if node is already in graph
 						for(k=0;k<$scope.graph.nodes.length;k++){
 							//Delete repetitions and find origin
 							//console.log(groupsOfNodes[j].name+"="+$scope.graph.nodes[k].name);
-							if(groupsOfNodes[j].name==$scope.graph.nodes[k].name)
+							if(groupsOfNodes[j].name==$scope.graph.nodes[k].name){
 								searchResults.push(true);
+								if(relations.indexOf(k)==-1)
+									relations.push(k);
+								console.log(relations);
+							}
 							else
 								searchResults.push(false);
 							if(data.data.data.name==$scope.graph.nodes[k].name){
 								indexOrigin=k;
+								console.log("REPETIDO: "+data.data.data.name+ "ID: "+indexOrigin);
 							}
 						}							
 						if(searchResults.indexOf(true)==-1){
@@ -197,7 +204,11 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 								$scope.graph.nodes.push({"name":groupsOfNodes[j].name,"group":2,"id_discogs":groupsOfNodes[j].id});							
 						}
 							$scope.graph.links.push({"source":indexOrigin,"target":$scope.graph.nodes.length-1,"value":1});
-
+							for(l=0;l<relations.length;l++){
+								$scope.graph.links.push({"source":indexOrigin,"target":relations[l],"value":1});														
+							}
+							//console.log(indexOrigin);
+							console.log(relations);
 						}
 					}
 			});
