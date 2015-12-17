@@ -1,0 +1,26 @@
+{
+  "nodes":[
+    {"name":"Steven Wilson","group":1},
+    {"name":"Porcupine Tree","group":1},
+    {"name":"Gavin Harrison","group":1},
+    {"name":"Gutrie Govan","group":1},
+    {"name":"King Crimson","group":1},
+    {"name":"Geborand","group":1},
+    {"name":"Champtercier","group":1},
+    {"name":"Cravatte","group":1},
+    {"name":"Count","group":1},
+    {"name":"OldMan","group":1}
+  ],
+  "links":[
+    {"source":1,"target":0,"value":1},
+    {"source":2,"target":0,"value":1},
+    {"source":3,"target":0,"value":1},
+    {"source":3,"target":2,"value":1},
+    {"source":4,"target":0,"value":1},
+    {"source":5,"target":0,"value":1},
+    {"source":6,"target":0,"value":1},
+    {"source":7,"target":0,"value":1},
+    {"source":8,"target":0,"value":1},
+    {"source":9,"target":0,"value":1}
+  ]
+}
