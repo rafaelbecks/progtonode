@@ -1,28 +1,14 @@
-                particlesJS.load('particles-js', 'particles.json', function() {
-                  console.log('callback - particles.js config loaded');
-                });
-
-                particlesJS.load('particles-loading',"particles-loading.json",function(){
-                    if(document.URL.indexOf("id")==-1){   
-                      $(".loader").hide();
-                     }
-                });
-
                
                 $(document).ready(function(){
-                    var bg=Math.floor((Math.random() * 13) + 1);
-                    $(".container_single_page").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover; background-attachment: fixed;");
+                          var bg=Math.floor((Math.random() * 9) + 1);
+                          $(".container_single_page").attr("style","background-image : url('img/"+bg+".jpg'); background-position: center; background-size:cover; background-attachment: fixed;");
 
 
-                $(window).on('scroll', function () {
-                    var pixs = $(document).scrollTop()
-                    pixs = pixs / 120;
-                    $(".container_single_page").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" });
-                });
-
-                $('[data-toggle="tooltip"]').tooltip(); 
-                 $( ".controls,.graphDrag" ).draggable({ scroll: false});
-
+                      $(window).on('scroll', function () {
+                          var pixs = $(document).scrollTop()
+                          pixs = pixs / 120;
+                          $(".container_single_page").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" });
+                      });
                   });
 
 

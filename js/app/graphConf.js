@@ -45,9 +45,10 @@ force
   d3.selectAll("circle.node").on("click", function(){
         index=d3.select(this).datum().index;
         artist_id=graph.nodes[d3.select(this).datum().index].id_discogs;
-        if(artist_id!=0)
-          $('body').scope().showArtistData(artist_id,undefined);
-        else
+        if(artist_id!=0){
+          console.log($('body').scope());
+          $('body').scope().showArtistData(artist_id,undefined);          
+        }else
           swal("Sorry", "You are already in this artist", "warning");
         });
 

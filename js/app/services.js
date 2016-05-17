@@ -17,8 +17,8 @@ progtonode.factory("services", ['$http', function($http) {
 	      });
 	 	};
 
-	  obj.searchMusic=function(keyword){
-	  	return $http.jsonp(serviceBase+"database/search?q="+keyword+"&type=artist&key="+key+"&secret="+secret+"&callback=JSON_CALLBACK").success(function(data){
+	  obj.searchMusic=function(keyword,type){
+	  	return $http.jsonp(serviceBase+"database/search?q="+keyword+"&type="+type+"&key="+key+"&secret="+secret+"&callback=JSON_CALLBACK").success(function(data){
 	 			console.log("OK");	
 	      });	  	
 	  }
@@ -28,6 +28,14 @@ progtonode.factory("services", ['$http', function($http) {
 	 			console.log("OK");	
 	      });
 	  }
+
+	  obj.getMasterVersions = function(master_id)
+	  {
+	  	return $http.jsonp(serviceBase+"masters/"+master_id+"/versions"+callback+"&key="+key+"&secret="+secret).success(function(data){
+	 			console.log("OK");	
+	      });	  	
+	  }
+
 
 	  obj.releaseService=function(url,n){
 	  		return $http.jsonp(url+callback+"&key="+key+"&secret="+secret+"&per_page="+n).success(function(data){
@@ -41,6 +49,14 @@ progtonode.factory("services", ['$http', function($http) {
 	  	}
 	  	return $http.get("https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&q="+q+"&type=playlist&key=AIzaSyCLY3rJCKgk2OygEKE2f4ZiGdArRF_dZDE").success(function(data){
 	  		console.log("OK Youtube");
+	  	});
+	  }
+
+	  obj.getLanguage = function()
+	  {
+	  	return $http.get("js/app/lang.json").success(function(data)
+	  	{
+	  		console.log("funciona");
 	  	});
 	  }
 

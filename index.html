@@ -18,8 +18,9 @@
         <link rel="stylesheet" type="text/css" href="css/sweetalert.css">
         <link rel="stylesheet" type="text/css" href="css/rzslider.min.css">
         <!-- libs -->
+        <script src="js/lib/pace.min.js"></script>
         <script src="js/lib/angular.min.js"></script>
-        <script src="js/lib/particles.min.js"></script>
+        <script src="js/lib/angular-ui-router.js"></script>
         <script src="js/lib/sigma.min.js"></script>
         <script src="js/lib/angular-sanitize.js"></script>
         <script src="js/lib/sweetalert.min.js"></script>
@@ -31,269 +32,64 @@
         <script src="js/app/graphConf.js"></script>
         <script src="js/app/services.js"></script>
         <script src="js/app/controllers.js"></script>
-
+        <script src="js/lib/particles.min.js"></script>
     </head>
     
-    <body ng-controller="mainController">
+    <body>
+        <div class="container_single_page">
+        </div>
+                <div class="navbar">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <span>
+                                <img src="img/logolightnav.png" class="logo-nav-bar">
+                            </span>
+                            
+                                <span ui-sref="info" id="proglogoIcon" class="logo-mini" data-toggle="tooltip" title="Project Info">                                
+                                    <img src="img/proglogo.png">                            
+                                </span>
 
-    <nav>
-        
-    </nav>
-    <div class="container_single_page">
-    </div>
-            <div class="navbar">
+                                <span ui-sref="main" id="searchIcon" class="ion-ios-search search-icon" data-toggle="tooltip" title="Project Info"></span>
+                        </div>
+                    </div>
+                </div>
+
+            <ui-view></ui-view>
+
+            <footer class="section footer">
                 <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html"><img src="img/proglogo.png" class="logo"><span><strong>PROG</strong>TO<strong>NODE</strong></span></a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="menu">
-                                <a href="#"><span class="ion-navicon navicon"></span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-    <div class="cover">
-
-            <div class="cover-image"></div>
-            <center class="container" id="particles-js">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-center main-banner">
-                        <!--h1 class="text-inverse">Prog Network</h1-->
-                        <img src="img/logolight.png" class="main-logo">
-                        <p class="text-inverse">Graph search for prog music</p>
-                        <input type="text" ng-enter="searchArtist(keywordSearch);" class="input-search" ng-model="keywordSearch" placeholder="Search for a band, project, musician"/>  
-                        <button ng-click="searchArtist(keywordSearch);" class="search-button"><span ng-class="{ 'ion-load-c fa-spin': searching, 'ion-ios-search': searching==false }"></span></button>
-                        <br>
-                        <br>
-                        <center>
-                            <ul class="search-results row" ng-show="searchIsDone==true">
-                                <center><p>Results:</p></center>
-                                <li ng-click="emptyTrack(); showArtistData(res.id,res.thumb);" ng-repeat="res in results" class="col-md-6" ng-if="$index<=7">
-                                <img class="search-thumb" ng-src="{{res.thumb}}">
-                                {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}</li>
-                            </ul>                            
-                        </center>
-                    </div>
-                </div>
-            </center>
-        </div>
-        <div class="section results-div" id="results">
-
-        </div>
-            <div class="container content-results">
-                <div class="row">
-                    <div class="col-md-12">
-                        <center>                        
-                            <div class="results container">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p class="copy"></br></br></br>Copyright &copy; 2015</p>                  </div>
+                        <div class="col-sm-6">
+                            <p class="text-info text-right">
+                                <br>
+                                <br>
+                            </p>
                             <div class="row">
-                                <div class="col-md-8">
-                                <div class="loader">
-                                <div id="particles-loading"></div>
-                                <p>Building graph ({{percentaje | limitTo: 5}}%)</p>
-                                <!--div ng-if="showManualConstruction==true">
-                                    <p>Cant't see the graph?</p>
-                                    <button classs="manual-button">Click here</button>                                    
-                                </div-->
+                                <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
+                                    <a href="https://www.instagram.com/progtonode/" target="blank"><i class="social ion-social-instagram text-inverse"></i></a>
+                                    <a href="#"><i class="social ion-social-twitter text-inverse"></i></a>
+                                    <a href="https://www.facebook.com/progtonode/" target="blank"><i class="social ion-social-facebook text-inverse"></i></a>
+                                    <a href="https://github.com/rafaelbecks/progtonode" target="blank"><i class="social ion-social-github text-inverse"></i></a>
                                 </div>
-                                    <div class="graphDrag">
-                                        <graph></graph>                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-4 white-info" ng-if="afterSearch==true">
-                                <div class="card-background">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img ng-click="buildG();" ng-src="{{img_artist}}">
-                                        </div>
-                                        <div class="col-md-8">                                    
-                                        <h3>{{artistBase.name}}</h3>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                            <span class="staticon ion-network"></span>
-                                            <p>{{graph.nodes.length}} nodes</p>
-                                            </div>
-                                            <div class="col-md-6">
-                                            <span class="staticon ion-merge"></span>
-                                            <p>{{graph.links.length}} links</p>
-                                            </div>
-                                        </div>
-                                        <span lass="level-label"><strong>Level:</strong> Astral graph</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="info-artist">
-                                    <p class="artist-description" ng-bind-html="artistBase.profile"></p>                                    
-                                    <div ng-if="artistBase.groups!=undefined " class="row projects-members">
-                                        <div class="col-md-6">
-                                            <h4>Active Projects</h4>
-                                            <ul class="groups-members">
-                                                <li id="list-{{projects.id}}" onmouseover="bigGraph(this.id);" onmouseout="normalGraph(this.id)" ng-if="projects.active==true" ng-repeat="projects in artistBase.groups">{{projects.name}}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h4>Previous Projects</h4>
-                                            <ul class="groups-members">
-                                                <li id="list-{{projects.id}}" onmouseover="bigGraph(this.id);" onmouseout="normalGraph(this.id)" ng-if="projects.active==false" ng-repeat="projects in artistBase.groups">{{projects.name}}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div ng-if="artistBase.members!=undefined" class="row projects-members">
-                                        <div class="col-md-6">
-                                            <h4>Current members</h4>
-                                            <ul class="groups-members">
-                                                <li id="list-{{musician.id}}" onmouseover="bigGraph(this.id);" onmouseout="normalGraph(this.id)" ng-if="musician.active==true" ng-repeat="musician in artistBase.members">{{musician.name}}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <h4>Previous members</h4>
-                                            <ul class="groups-members">
-                                                <li id="list-{{musician.id}}" onmouseover="bigGraph(this.id);" onmouseout="normalGraph(this.id)" ng-if="musician.active==false" ng-repeat="musician in artistBase.members">{{musician.name}}</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="buttons">
-                                        <button class="btn info-buttons" data-toggle="tooltip" title="Show your road graph"><i class="ion-network"></i>&nbsp;&nbsp;Journey</button>
-                                        <button ng-click="getReleases(artistBase.releases_url,artistBase.name);" class="btn info-buttons" data-toggle="modal" data-toggle="tooltip" title="Show albums" data-target="#modalAlbums"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
-                                        <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#modalYoutube"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
-                                    </div>
-                                </div>
-<!--div class="col-md-4 white-info ng-scope" ng-if="afterSearch==true">
-                                            <div class="info-circle">
-                                            <span class="ion-ios-information-outline"></span><p>Bio</p>
-                                            </div>
-                                            <img ng-click="buildG();" ng-src="{{img_artist}}" style="border-radius: 84px;"/>    
- <h3 class="name-artist">{{artistBase.name}}</h3>
-                                            <div class="album-circle"><span class="ion-ios-musical-notes"></span><p>Albums</p></div>
-                                            <div class="videos-circle"><span class="ion-social-youtube-outline"></span><p>Videos</p></div>
-                                </div-->
-
-                                </div>
-
-
-
-                                    </div>
-                                <div class="controls" ng-show="afterSearch==true">
-                                    <span class="label-span">Controls</span>
-                                        <div class="onoffswitch" data-toggle="tooltip" title="Expanded">
-                                            <input ng-model="expanded" ng-change="build2nd(artistBase);" ng-checked="expanded==true" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
-                                            <label class="onoffswitch-label" for="myonoffswitch"></label>
-                                        </div>        
-                                    <span onclick="toggleFullScreen();" data-toggle="tooltip" title="Full Screen" class="full-screen ion-arrow-expand"></span> 
-                                    &nbsp;&nbsp;   
-                                    <span data-toggle="tooltip" ng-click="toggleInfo();" title="Show/Hide Info" class="full-screen ion-ios-information-outline"></span>
-                                    <div class="sliderContainer">
-                                        <rzslider data-toggle="tooltip" title="Zoom" 
-                                             rz-slider-model="zoomSlider.value"
-                                             rz-slider-options="zoomSlider.options"></rzslider>
-                                    </div>
-                                    </div>
-
                             </div>
-                            </div>
-                            <div ng-if="tracking.length>1" id="wizard" class="form_wizard wizard_horizontal">
-                                    <ul class="wizard_steps anchor">
-                                        <li ng-repeat="track in tracking">
-                                            <a href="#step-1" class="done" isdone="1" rel="1">
-                                                <span class="step_no">{{$index+1}}</span>
-                                        <small>{{track.name}}</small>
-                                    </span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                        
+                            <div class="row">
+                                <div class="col-md-12 hidden-xs text-right">
+                                    <a href="https://www.instagram.com/progtonode/" target="blank"><i class="social ion-social-instagram text-inverse"></i></a>
+                                    <a href="#"><i class="social ion-social-twitter text-inverse"></i></a>
+                                    <a href="https://www.facebook.com/progtonode/" target="blank"><i class="social ion-social-facebook text-inverse"></i></a>
+                                    <a href="https://github.com/rafaelbecks/progtonode" target="blank"><i class="social ion-social-github text-inverse"></i></a>
                                 </div>
-                        </center>
-                    </div>
-                </div>
-
-            </div>
-        <footer class="section footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p class="copy"></br></br></br>Copyright &copy; 2015</p>                  </div>
-                    <div class="col-sm-6">
-                        <p class="text-info text-right">
-                            <br>
-                            <br>
-                        </p>
-                        <div class="row">
-                            <div class="col-md-12 hidden-lg hidden-md hidden-sm text-left">
-                                <a href="https://www.instagram.com/progtonode/" target="blank"><i class="social ion-social-instagram text-inverse"></i></a>
-                                <a href="#"><i class="social ion-social-twitter text-inverse"></i></a>
-                                <a href="https://www.facebook.com/progtonode/" target="blank"><i class="social ion-social-facebook text-inverse"></i></a>
-                                <a href="https://github.com/rafaelbecks/progtonode" target="blank"><i class="social ion-social-github text-inverse"></i></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 hidden-xs text-right">
-                                <a href="https://www.instagram.com/progtonode/" target="blank"><i class="social ion-social-instagram text-inverse"></i></a>
-                                <a href="#"><i class="social ion-social-twitter text-inverse"></i></a>
-                                <a href="https://www.facebook.com/progtonode/" target="blank"><i class="social ion-social-facebook text-inverse"></i></a>
-                                <a href="https://github.com/rafaelbecks/progtonode" target="blank"><i class="social ion-social-github text-inverse"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-        </footer>
-<div id="modalYoutube" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+            </footer>
+ 
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Listen some {{artistBase.name}} music</h4>
-      </div>
-      <div ng-if="playlist_id!=undefined" class="modal-body">
-       <iframe width="560" height="315" ng-src="{{trustSrc(playlist_id_current)}}" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <center><button ng-click="refreshPlayer(playlist_id)" type="button" class="btn btn-default"><span class="ion-ios-refresh-empty"></span>&nbsp;Refresh to current artists</button></center>
-      </br>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="ion-ios-close-outline"></span>&nbsp;&nbsp;Close</button>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-<div id="modalAlbums" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Discover {{artistBase.name}} music</h4>
-      </div>
-
-      <div class="col-md-3" ng-repeat="alb in albums">
-      <center>
-      <img class="album-thumb" ng-if="alb.thumb!=''" ng-src="{{alb.thumb}}">
-      <img class="album.thumb" ng-if="alb.thumb==''" ng-src="img/album-default.png">          
-      </center>
-      </div>
-
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="ion-ios-close-outline"></span>&nbsp;&nbsp;Close</button>
-      </div>
-
-    </div>
-
-  </div>
-</div>
-
-        <script src="js/app/visuals.js"></script>
+            <script src="js/app/visuals.js"></script>
 
     </body>
 

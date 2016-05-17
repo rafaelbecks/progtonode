@@ -8,7 +8,28 @@ if(document.URL.indexOf("#")==-1){
   location.href="#/";
 }
 
-var progtonode=angular.module('progtonode',['ngSanitize','rzModule']);
+paceOptions = {
+  elements: false,
+  restartOnRequestAfter: false
+}
+
+var progtonode=angular.module('progtonode',['ngSanitize','rzModule','ui.router']);
+
+progtonode.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {        
+        $stateProvider
+            .state('main', {
+                url: '/',
+                templateUrl : 'graph-view.html',
+                controller  : 'mainController'
+            })
+            .state('info', {
+                url: '/info',
+                templateUrl : 'info.html',
+                controller : 'infoController'
+            })
+
+});
+
 
 progtonode.directive('ngEnter', function () {
     return function (scope, element, attrs) {
@@ -22,3 +43,4 @@ progtonode.directive('ngEnter', function () {
         });
     };
 });
+

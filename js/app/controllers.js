@@ -4,7 +4,22 @@ Author: Rafael Becerra
 Date: 19/11/2015
 */
 
-progtonode.controller('mainController', function($scope ,$http, services,$sce){
+progtonode.controller('mainController', function($scope ,$http, services,$sce,$stateParams,$state){
+
+    particlesJS.load('particles-js', 'particles.json', function() {
+    });
+
+    particlesJS.load('particles-loading',"particles-loading.json",function(){
+		if(document.URL.indexOf("id")==-1){   
+		  $(".loader").hide();
+		 }
+    });
+
+    $("#searchIcon").hide();
+    $("#proglogoIcon").show();
+
+    $('[data-toggle="tooltip"]').tooltip(); 
+     $( ".controls,.graphDrag" ).draggable({ scroll: false});
 
 	$scope.$watch("percentaje", function (newValue, oldValue ) {
     if(newValue>=80){
@@ -12,12 +27,8 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
     	setTimeout(function(){
     		$scope.buildG();
     	},1500);
-    }/*else{
-    	setTimeout(function(){
-    		$scope.showManualConstruction=true;
-    	},15000);
-    }*/
-});
+    }
+	});
 
 	emptyGraph=function(){
 		 $scope.graph={
@@ -31,7 +42,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 	$scope.tracking=[];
 	$scope.expanded=false;
 	$scope.afterSearch=false;
-
+	$scope.searchType = "artist"
 	$scope.zoomSlider = {
 	  value: 0,
 	  options: {
@@ -52,7 +63,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
  	 $scope.tracking=[];
 	$(".main-banner").addClass("show-results"); 
 	$scope.searching=true;
-	services.searchMusic(keyword).then(function(data){
+	services.searchMusic(keyword,$scope.searchType).then(function(data){
 		$scope.searching=false;
 		$scope.searchIsDone=true;
 		$scope.results=data.data.data.results;
@@ -61,12 +72,12 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 
 	$scope.showArtistData=function(id,thumb){
 	$scope.percentaje=0;
+  	location.href="#/?id="+id;
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
 	$scope.afterSearch=true;
 	$scope.loading = true;
-	location.href="#id="+id;
 		 $scope.graph={
 		  "nodes":[],
 		  "links":[]
@@ -187,13 +198,11 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 								searchResults.push(true);
 								if(relations.indexOf(k)==-1)
 									relations.push(k);
-								console.log(relations);
 							}
 							else
 								searchResults.push(false);
 							if(data.data.data.name==$scope.graph.nodes[k].name){
 								indexOrigin=k;
-								console.log("REPETIDO: "+data.data.data.name+ "ID: "+indexOrigin);
 							}
 						}							
 						if(searchResults.indexOf(true)==-1){
@@ -207,8 +216,6 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 							for(l=0;l<relations.length;l++){
 								$scope.graph.links.push({"source":indexOrigin,"target":relations[l],"value":1});														
 							}
-							//console.log(indexOrigin);
-							console.log(relations);
 						}
 					}
 			});
@@ -238,7 +245,6 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 		$(".loader").hide();
 		$("graph").show();
 		drawGraph($scope.graph);
-		console.log($scope.graph);
 	}
 
 	buildProfileText=function(bio){
@@ -251,17 +257,54 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce){
 		}
 	};
 
-	if(document.URL.indexOf("id")>0){
-		id_search=document.URL.substring(document.URL.indexOf("id")+3,document.URL.length);
-		$scope.showArtistData(id_search,undefined);
-	}
-
 	$scope.trustSrc = function(src) {
     return $sce.trustAsResourceUrl(src);
   }
 
-  $scope.emptyTrack=function(){
+  $scope.emptyTrack=function(id){
   	 $scope.tracking=[];
   }
+
+
+	if(document.URL.indexOf("id")>0){
+		id_search=document.URL.substring(document.URL.indexOf("id")+3,document.URL.length);
+		$scope.showArtistData(id_search,undefined);
+		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
+	}
+
+
+ $scope.showReleaseInfo = function(url,thumb)
+ {
+ 	 if(thumb!=undefined)
+		$scope.img_artist=thumb;
+	$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
+	$("graph").hide();
+	$(".loader").show();
+ 	services.genericService(url).then(function(data){
+ 		$scope.masterInfo = data.data.data;
+ 		services.getMasterVersions($scope.masterInfo.id).then(function(data)
+ 		{
+ 			firstVersionURL = data.data.data.versions[0].resource_url;
+ 			services.genericService(firstVersionURL).then(function(data){
+ 				releaseData = data.data.data
+
+ 				
+ 			});
+ 		// 	$scope.mainRealeaseInfo = data.data.data;
+
+			// buildGraph($scope.mainRealeaseInfo.title,$scope.mainRealeaseInfo.extraartists,$scope.mainRealeaseInfo.id);
+
+ 		});
+ 	});
+ }
+  
 });
 
+
+progtonode.controller("infoController",function($scope, $state){
+    $("#searchIcon").show();
+    $("#proglogoIcon").hide();
+  particlesJS.load('particles-js', 'particles.json', function() {
+    });
+
+});
