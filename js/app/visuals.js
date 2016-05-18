@@ -9,7 +9,8 @@
                           pixs = pixs / 120;
                           $(".container_single_page").css({"-webkit-filter": "blur("+pixs+"px)","filter": "blur("+pixs+"px)" });
                       });
-                  });
+
+                    });
 
 
 function toggleFullScreen() {

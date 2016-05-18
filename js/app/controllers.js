@@ -19,7 +19,13 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
     $("#proglogoIcon").show();
 
     $('[data-toggle="tooltip"]').tooltip(); 
-     $( ".controls,.graphDrag" ).draggable({ scroll: false});
+     $( ".controls,graph" ).draggable({ scroll: false});
+
+   $('.toggle').click(function(e){
+      e.preventDefault(); // The flicker is a codepen thing
+      $(this).toggleClass('toggle-on');
+    });
+
 
 	$scope.$watch("percentaje", function (newValue, oldValue ) {
     if(newValue>=80){
@@ -54,6 +60,12 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	  }
 	  }
 	};
+
+	$scope.setSearchMode = function(current)
+	{
+		$scope.searchType = (current=="artist") ? "master" : "artist";
+	}
+
 
 	$scope.searchArtist=function(keyword){
 	 $scope.graph={
@@ -286,9 +298,10 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
  		{
  			firstVersionURL = data.data.data.versions[0].resource_url;
  			services.genericService(firstVersionURL).then(function(data){
- 				releaseData = data.data.data
-
- 				
+ 				releaseData = data.data.data;
+ 				musicians = getArtistsByTracks(releaseData);
+ 				console.log(musicians);
+				buildGraph(releaseData.title,musicians,releaseData.id);
  			});
  		// 	$scope.mainRealeaseInfo = data.data.data;
 
@@ -299,6 +312,34 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
  }
   
 });
+
+
+getArtistsByTracks = function(release)
+{
+	musicians = [];
+	musiciansIds = [];
+
+	// Créditos generales del album
+	
+	for(var h in release.extraartists){
+		if(musiciansIds.indexOf(release.extraartists[h].id)==-1){
+			musicians.push(release.extraartists[h]);			
+			musiciansIds.push(release.extraartists[h].id);
+		}
+	}
+
+	// Créditos por track
+	for(var i=0;i<release.tracklist.length;i++)
+	{
+		for(var j in release.tracklist[i].extraartists){
+			if(musiciansIds.indexOf(release.tracklist[i].extraartists[j].id)==-1){
+				musicians.push(release.tracklist[i].extraartists[j]);			
+				musiciansIds.push(release.tracklist[i].extraartists[j].id);
+			}
+		}
+	}
+	return musicians;
+}
 
 
 progtonode.controller("infoController",function($scope, $state){

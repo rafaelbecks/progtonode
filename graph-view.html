@@ -8,22 +8,36 @@
                         <center class="main-logo">
                             <img src="img/logolight.png">                            
                         </center>
-                        <input type="text" ng-enter="searchArtist(keywordSearch);" class="input-search" ng-model="keywordSearch" placeholder="Search for a band, project, musician"/>  
+                        <input type="text" ng-enter="searchArtist(keywordSearch);" class="input-search" ng-model="keywordSearch" placeholder="Enter your prog search"/>  
                         <button ng-click="searchArtist(keywordSearch);" class="search-button"><span ng-class="{ 'ion-load-c fa-spin': searching, 'ion-ios-search': searching==false }"></span></button>
                         <br>
                         <br>
                         <center>
                             <div class="search-types">
-                                <ul>
-                                    <li ng-click="searchType='artist';"><span ng-class="{'activeSearch' : searchType=='artist'}" class="filter-icon ion-person-stalker"></span> <span class="filter-text">Artist/Band</span></li>
-                                    <li ng-click="searchType='master';"><span class="filter-icon ion-ios-musical-notes" ng-class="{'activeSearch' : searchType=='master'}"></span> <span class="filter-text">Album</span></li>
-                                </ul>
+                                <p ng-if="searchType=='artist'">
+                                    <span class="ion-planet"></span> Planet Mode
+                                    </br><span class="tiny">Search for artists/bands</span>
+                                </p>
+                                <p ng-if="searchType=='master'">
+                                    <span class="ion-network"></span> System Mode
+                                    </br><span class="tiny">Search for albums</span>
+                                </p>
+
+                                <div class='toggle' id='switch' ng-click="setSearchMode(searchType);">
+                                    <div class='toggle-text-off'></div>
+                                    <div class='glow-comp'></div>
+                                    <div class='toggle-button'></div>
+                                    <div class='toggle-text-on'></div>
+                                </div>
                             </div>
                             <ul class="search-results row" ng-show="searchIsDone==true">
-                                <li ng-if="searchType=='artist'" ng-click="emptyTrack(); showArtistData(res.id,res.thumb);"  ng-repeat="res in results" class="col-md-6" ng-if="$index<=7">
-                                <li ng-if="searchType=='master'" ng-click="emptyTrack(); showReleaseInfo(res.resource_url,res.thumb);"  ng-repeat="res in results" class="col-md-6" ng-if="$index<=7">
-                                <img class="search-thumb" ng-src="{{res.thumb}}">
-                                {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}</li>
+                                <li ng-show="searchType=='artist'" ng-click="emptyTrack(); showArtistData(res.id,res.thumb);"  ng-repeat="res in results" class="col-md-6" ng-if="$index<=7"> 
+                                         <img class="search-thumb" ng-src="{{res.thumb}}">
+                                        {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}
+                                </li>
+                                <li ng-show="searchType=='master'" ng-click="emptyTrack(); showReleaseInfo(res.resource_url,res.thumb);"  ng-repeat="res in results" class="col-md-6" ng-if="$index<=7"> <img class="search-thumb" ng-src="{{res.thumb}}">
+                                        {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}
+                                </li>
                             </ul>                            
                         </center>
                     </div>
@@ -137,7 +151,7 @@
 
                                     </div>
                                 <div class="controls" ng-show="afterSearch==true">
-                                    <span class="label-span">Controls</span>
+                                    <span class="label-span">Set the Controls</span>
                                         <div class="onoffswitch" data-toggle="tooltip" title="Expanded">
                                             <input ng-model="expanded" ng-change="build2nd(artistBase);" ng-checked="expanded==true" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
                                             <label class="onoffswitch-label" for="myonoffswitch"></label>
