@@ -138,7 +138,7 @@
                                             <ul class="groups-members">
                                                 <li  class="col-md-6" id="list-{{projects.id}}" ng-repeat="musician in masterInfo.musicians">{{musician.name}}</br> <span class="tiny">({{musician.role}})</span></li>
                                             </ul>
-                                            <iframe width="90%" height="200" ng-src="{{trustSrc(masterInfo.videos[0].uri)}}" frameborder="0" allowfullscreen></iframe>
+                                            <iframe class="youtube-album" width="90%" height="200" ng-src="{{trustSrc(masterInfo.videos[0].uri.replace('watch?v=', 'v/'))}}" frameborder="0" allowfullscreen></iframe>
                                         </div>
                                     </div>
 

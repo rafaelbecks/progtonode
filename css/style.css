@@ -990,3 +990,9 @@ body{
 {
   max-height: 50vh !important;
 }
+
+.youtube-album
+{
+      position: relative;
+      left: 10px;
+}
