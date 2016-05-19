@@ -84,7 +84,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 
 	$scope.showArtistData=function(id,thumb){
 	$scope.percentaje=0;
-  	location.href="#/?id="+id;
+  	location.href="#/?artist="+id;
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
@@ -277,16 +277,9 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
   	 $scope.tracking=[];
   }
 
-
-	if(document.URL.indexOf("id")>0){
-		id_search=document.URL.substring(document.URL.indexOf("id")+3,document.URL.length);
-		$scope.showArtistData(id_search,undefined);
-		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
-	}
-
-
  $scope.showReleaseInfo = function(url,thumb)
  {
+	emptyGraph(); 
  	 if(thumb!=undefined)
 		$scope.img_artist=thumb;
 	$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
@@ -294,14 +287,17 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	$(".loader").show();
  	services.genericService(url).then(function(data){
  		$scope.masterInfo = data.data.data;
+ 		location.href="#/?album="+$scope.masterInfo.id;
+ 		$scope.img_artist=$scope.masterInfo.images[0].uri150;
  		services.getMasterVersions($scope.masterInfo.id).then(function(data)
  		{
  			firstVersionURL = data.data.data.versions[0].resource_url;
  			services.genericService(firstVersionURL).then(function(data){
  				releaseData = data.data.data;
  				musicians = getArtistsByTracks(releaseData);
- 				console.log(musicians);
+ 				$scope.masterInfo.musicians = musicians;
 				buildGraph(releaseData.title,musicians,releaseData.id);
+				$scope.afterSearch = true;
  			});
  		// 	$scope.mainRealeaseInfo = data.data.data;
 
@@ -311,6 +307,19 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
  	});
  }
   
+	if(document.URL.indexOf("artist")>0){
+		id_search=document.URL.substring(document.URL.indexOf("artist")+7,document.URL.length);
+		$scope.showArtistData(id_search,undefined);
+		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
+	}
+
+	if(document.URL.indexOf("album")>0){
+		id_search=document.URL.substring(document.URL.indexOf("album")+6,document.URL.length);
+		$scope.searchType = 'master'; $("#switch").addClass("toggle-on");
+		$scope.showReleaseInfo("https://api.discogs.com/masters/"+id_search,undefined);
+		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
+	}
+
 });
 
 

@@ -75,7 +75,8 @@
                                             <img ng-click="buildG();" ng-src="{{img_artist}}">
                                         </div>
                                         <div class="col-md-8">                                    
-                                        <h3>{{artistBase.name}}</h3>
+                                        <h3 ng-if="searchType=='artist'">{{artistBase.name}}</h3>
+                                        <h3 ng-if="searchType=='master'">{{masterInfo.title}}</h3>
                                         <div class="row">
                                             <div class="col-md-6">
                                             <span class="staticon ion-network"></span>
@@ -100,8 +101,8 @@
                                 </div>
 
                                 <div class="info-artist">
-                                    <p class="artist-description" ng-bind-html="artistBase.profile"></p>                                    
-                                    <div ng-if="artistBase.groups!=undefined " class="row projects-members">
+                                    <p ng-if="searchType=='artist'" class="artist-description" ng-bind-html="artistBase.profile"></p>                                    
+                                    <div ng-if="artistBase.groups!=undefined && searchType=='artist'" class="row projects-members">
                                         <div class="col-md-6">
                                             <h4>Active Projects</h4>
                                             <ul class="groups-members">
@@ -116,7 +117,7 @@
                                         </div>
                                     </div>
 
-                                    <div ng-if="artistBase.members!=undefined" class="row projects-members">
+                                    <div ng-if="artistBase.members!=undefined && searchType=='artist'" class="row projects-members">
                                         <div class="col-md-6">
                                             <h4>Current members</h4>
                                             <ul class="groups-members">
@@ -130,9 +131,20 @@
                                             </ul>
                                         </div>
                                     </div>
+
+                                    <div ng-if="masterInfo.musicians!=undefined && searchType=='master'" class="row projects-members" ng-class="{'fix_height_album' : searchType=='master'}">
+                                        <div class="col-md-12">
+                                            <h4>Album Credits</h4>
+                                            <ul class="groups-members">
+                                                <li  class="col-md-6" id="list-{{projects.id}}" ng-repeat="musician in masterInfo.musicians">{{musician.name}}</br> <span class="tiny">({{musician.role}})</span></li>
+                                            </ul>
+                                            <iframe width="90%" height="200" ng-src="{{trustSrc(masterInfo.videos[0].uri)}}" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+
                                     <div class="buttons">
-                                        <button ng-click="getReleases(artistBase.releases_url,artistBase.name);" class="btn info-buttons" data-toggle="modal" data-toggle="tooltip" title="Show albums" data-target="#modalAlbums"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
-                                        <button type="button" class="btn info-buttons" data-toggle="modal" data-target="#modalYoutube"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
+                                        <button ng-if="searchType=='artist'" ng-click="getReleases(artistBase.releases_url,artistBase.name);" class="btn info-buttons" data-toggle="modal" data-toggle="tooltip" title="Show albums" data-target="#modalAlbums"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
+                                        <button ng-if="searchType=='artist'" type="button" class="btn info-buttons" data-toggle="modal" data-target="#modalYoutube"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
                                     </div>
                                 </div>
 <!--div class="col-md-4 white-info ng-scope" ng-if="afterSearch==true">
