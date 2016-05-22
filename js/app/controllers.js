@@ -8,15 +8,6 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 
     visuals();
 
-	$scope.$watch("percentaje", function (newValue, oldValue ) {
-    if(newValue>=80){
-    	$scope.showManualConstruction=false;
-    	setTimeout(function(){
-    		$scope.buildG();
-    	},1500);
-    }
-	});
-
 	emptyGraph=function(){
 		 $scope.graph={
 		  "nodes":[],
@@ -299,6 +290,23 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
  	});
  }
   
+
+	$scope.$watch("percentaje", function (newValue, oldValue ) {
+    if(newValue>=80){
+    	$scope.showManualConstruction=false;
+    	setTimeout(function(){
+    		$scope.buildG();
+    	},1500);
+    }
+	});
+
+	$scope.$watch("afterSearch",function(newValue){
+		if(newValue == true)
+			$("body").removeClass('noScroll');
+	});
+
+
+
 	if(document.URL.indexOf("artist")>0){
 		id_search=document.URL.substring(document.URL.indexOf("artist")+7,document.URL.length);
 		$scope.showArtistData(id_search,undefined);
@@ -313,6 +321,8 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	}
 
 });
+
+
 
 
 getArtistsByTracks = function(release)
@@ -346,6 +356,7 @@ getArtistsByTracks = function(release)
 progtonode.controller("infoController",function($scope, $state){
     $("#searchIcon").show();
     $("#proglogoIcon").hide();
+    $("body").removeClass('noScroll');
   particlesJS.load('particles-js', 'particles.json', function() {
     });
 

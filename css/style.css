@@ -1016,3 +1016,8 @@ body{
     position: relative;
     bottom: 1px;
 }
+
+.noScroll
+{
+  overflow-y : hidden;
+}
