@@ -6,26 +6,7 @@ Date: 19/11/2015
 
 progtonode.controller('mainController', function($scope ,$http, services,$sce,$stateParams,$state){
 
-    particlesJS.load('particles-js', 'particles.json', function() {
-    });
-
-    particlesJS.load('particles-loading',"particles-loading.json",function(){
-		if(document.URL.indexOf("id")==-1){   
-		  $(".loader").hide();
-		 }
-    });
-
-    $("#searchIcon").hide();
-    $("#proglogoIcon").show();
-
-    $('[data-toggle="tooltip"]').tooltip(); 
-     $( ".controls,graph" ).draggable({ scroll: false});
-
-   $('.toggle').click(function(e){
-      e.preventDefault(); // The flicker is a codepen thing
-      $(this).toggleClass('toggle-on');
-    });
-
+    visuals();
 
 	$scope.$watch("percentaje", function (newValue, oldValue ) {
     if(newValue>=80){
@@ -235,22 +216,33 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 		};
 
 
-	$scope.build2nd=function(artistBase){
-		emptyGraph();
+	$scope.build2nd=function(artistBase,type){
+		emptyGraph();		
+		$("graph").hide();
+		$(".loader").show();
 		if($scope.expanded){
-			$("graph").hide();
-			$(".loader").show();
-			if(artistBase.members!=undefined)
-				buildGraph2nd(artistBase.name,artistBase.members,0);
-			if(artistBase.groups!=undefined)
-				buildGraph2nd(artistBase.name,artistBase.groups,0);
+			if(type=="artist"){	
+				if(artistBase.members!=undefined)
+					buildGraph2nd(artistBase.name,artistBase.members,0);
+				if(artistBase.groups!=undefined)
+					buildGraph2nd(artistBase.name,artistBase.groups,0);				
+			}else
+			{
+				buildGraph2nd(artistBase.title,artistBase.musicians,0);
+			}
 		}
 		else{
-			if(artistBase.members!=undefined)
-				buildGraph(artistBase.name,artistBase.members,0);
-			if(artistBase.groups!=undefined)
-				buildGraph(artistBase.name,artistBase.groups,0);
+			if(type=="artist"){	
+				if(artistBase.members!=undefined)
+					buildGraph(artistBase.name,artistBase.members,0);
+				if(artistBase.groups!=undefined)
+					buildGraph(artistBase.name,artistBase.groups,0);
+			}else
+			{
+				buildGraph2nd(artistBase.title,artistBase.musicians,0);
+			}
 		}
+
 	}
 
 	$scope.buildG=function(){
@@ -331,7 +323,7 @@ getArtistsByTracks = function(release)
 	// Créditos generales del album
 	
 	for(var h in release.extraartists){
-		if(musiciansIds.indexOf(release.extraartists[h].id)==-1){
+		if(musiciansIds.indexOf(release.extraartists[h].id)==-1 && !isException(release.extraartists[h].role)){
 			musicians.push(release.extraartists[h]);			
 			musiciansIds.push(release.extraartists[h].id);
 		}

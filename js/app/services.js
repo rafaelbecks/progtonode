@@ -13,33 +13,33 @@ progtonode.factory("services", ['$http', function($http) {
 
 	  obj.getArtistInfo=function(artist_id){
 	  	return $http.jsonp(serviceBase+"artists/"+artist_id+callback+"&key="+key+"&secret="+secret).success(function(data){
-	 			console.log("OK");	
+	 				
 	      });
 	 	};
 
 	  obj.searchMusic=function(keyword,type){
 	  	return $http.jsonp(serviceBase+"database/search?q="+keyword+"&type="+type+"&key="+key+"&secret="+secret+"&callback=JSON_CALLBACK").success(function(data){
-	 			console.log("OK");	
+	 				
 	      });	  	
 	  }
 
 	  obj.genericService=function(url){
 	  		return $http.jsonp(url+callback+"&key="+key+"&secret="+secret).success(function(data){
-	 			console.log("OK");	
+	 				
 	      });
 	  }
 
 	  obj.getMasterVersions = function(master_id)
 	  {
 	  	return $http.jsonp(serviceBase+"masters/"+master_id+"/versions"+callback+"&key="+key+"&secret="+secret).success(function(data){
-	 			console.log("OK");	
+	 				
 	      });	  	
 	  }
 
 
 	  obj.releaseService=function(url,n){
 	  		return $http.jsonp(url+callback+"&key="+key+"&secret="+secret+"&per_page="+n).success(function(data){
-	 			console.log("OK");	
+	 				
 	      });
 	  };
 

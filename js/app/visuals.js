@@ -51,3 +51,46 @@ function normalGraph(id){
   color=$(circle).attr("style").substring($(circle).attr("style").indexOf("stroke")+7,$(circle).attr("style").length-1);
   $(circle).attr("style","stroke-width : 5px; stroke:"+color);
 }
+
+
+function visuals()
+{
+  particlesJS.load('particles-js', 'particles.json', function() {
+    });
+
+    particlesJS.load('particles-loading',"particles-loading.json",function(){
+    if(document.URL.indexOf("id")==-1){   
+      $(".loader").hide();
+     }
+    });
+
+  $(window).scroll(function() {
+      div = document.getElementById("results");
+    rect = div.getBoundingClientRect();
+      if ($(window).scrollTop() >= rect.top*2){
+        $("#searchIconBack").show();
+      $("#proglogoIcon").hide();
+      }
+    if ($(window).scrollTop() < rect.top*2){
+        $("#searchIconBack").hide();
+      $("#proglogoIcon").show();
+    }
+  });
+
+  $("#searchIconBack").click(function()
+  {
+    $("html, body").animate({ scrollTop: 0}, 1000);
+  });
+
+    $("#searchIcon").hide();
+  $("#searchIconBack").hide();
+    $("#proglogoIcon").show();
+
+    $('[data-toggle="tooltip"]').tooltip(); 
+     $( ".controls,graph" ).draggable({ scroll: false});
+
+   $('.toggle').click(function(e){
+      e.preventDefault(); // The flicker is a codepen thing
+      $(this).toggleClass('toggle-on');
+    });
+}

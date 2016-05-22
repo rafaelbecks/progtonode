@@ -996,3 +996,23 @@ body{
       position: relative;
       left: 10px;
 }
+
+.goTopButton
+{
+    position: fixed;
+    bottom: 39px;
+    right: 26px;
+    z-index: 99;
+    border: 1px solid rgba(255,255,255,.6);
+    border-radius: 42px;
+    padding: 3px 13px 3px 13px;
+    cursor: pointer;
+}
+
+.goTopButton span 
+{
+    color: #ccc;
+    font-size: 31px;
+    position: relative;
+    bottom: 1px;
+}

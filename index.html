@@ -31,6 +31,7 @@
         <script src="js/app/main.js"></script>
         <script src="js/app/graphConf.js"></script>
         <script src="js/app/services.js"></script>
+        <script src="js/app/exceptions.js"></script>
         <script src="js/app/controllers.js"></script>
         <script src="js/lib/particles.min.js"></script>
     </head>
@@ -45,11 +46,16 @@
                                 <img src="img/logolightnav.png" class="logo-nav-bar">
                             </span>
                             
-                                <span ui-sref="info" id="proglogoIcon" class="logo-mini" data-toggle="tooltip" title="Project Info">                                
-                                    <img src="img/proglogo.png">                            
-                                </span>
-
-                                <span ui-sref="main" id="searchIcon" class="ion-ios-search search-icon" data-toggle="tooltip" title="Project Info"></span>
+                            <span ui-sref="info" id="proglogoIcon" class="logo-mini" data-toggle="tooltip" title="Project Info">
+                                <img src="img/proglogo.png">                            
+                            </span>
+                            
+                            <span ui-sref="main" id="searchIcon" class="ion-ios-search search-icon" data-toggle="tooltip" title="Project Info">
+                            </span>
+                            
+                            <span id="searchIconBack" class="ion-ios-search search-icon" data-toggle="tooltip" title="Back to search">
+                            </span>
+                        
                         </div>
                     </div>
                 </div>
@@ -88,7 +94,6 @@
 
             </footer>
  
-
             <script src="js/app/visuals.js"></script>
 
     </body>
