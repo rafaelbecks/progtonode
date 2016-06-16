@@ -6,7 +6,10 @@ var exceptions = [
     "photography",
     "mixed",
     "master",
-    "producer"
+    "producer",
+    "management",
+    "layout",
+    "directed"
 ]
 
 isException = function(rol)

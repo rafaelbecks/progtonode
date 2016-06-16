@@ -35,7 +35,7 @@
                                          <img class="search-thumb" ng-src="{{res.thumb}}">
                                         {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}
                                 </li>
-                                <li ng-show="searchType=='master'" ng-click="emptyTrack(); showReleaseInfo(res.resource_url,res.thumb);"  ng-repeat="res in results" class="col-md-6" ng-if="$index<=7"> <img class="search-thumb" ng-src="{{res.thumb}}">
+                                <li ng-show="searchType=='master'" ng-click="emptyTrack(); showReleaseInfo(res.id,res.thumb);"  ng-repeat="res in results" class="col-md-6" ng-if="$index<=7"> <img class="search-thumb" ng-src="{{res.thumb}}">
                                         {{ res.title | limitTo: 15 }}{{res.title.length > 15 ? '...' : ''}}
                                 </li>
                             </ul>                            
@@ -165,8 +165,7 @@
                                 <div class="controls" ng-show="afterSearch==true">
                                     <span class="label-span">Set the Controls</span>
                                         <div class="onoffswitch" data-toggle="tooltip" title="Expanded">
-                                            <input ng-if="searchType=='artist'" ng-model="expanded" ng-change="build2nd(artistBase,'artist');" ng-checked="expanded==true" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" />
-                                            <input ng-if="searchType=='master'" ng-model="expanded" ng-change="build2nd(masterInfo,'master');" ng-checked="expanded==true" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" />
+                                            <input ng-model="expanded" ng-change="build2nd(artistBase,searchType);" ng-checked="expanded==true" type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" />
                                             <label class="onoffswitch-label" for="myonoffswitch"></label>
                                         </div>        
                                     <span onclick="toggleFullScreen();" data-toggle="tooltip" title="Full Screen" class="full-screen ion-arrow-expand"></span> 
@@ -233,12 +232,15 @@
             <h4 class="modal-title">Discover {{artistBase.name}} music</h4>
           </div>
 
-          <div class="col-md-3" ng-repeat="alb in albums">
-          <center>
-          <img class="album-thumb" ng-if="alb.thumb!=''" ng-src="{{alb.thumb}}">
-          <img class="album.thumb" ng-if="alb.thumb==''" ng-src="img/album-default.png">          
-          </center>
-          </div>
+            <div class="album-list">
+                  <div class="col-md-3" ng-repeat="alb in albums">
+                  <center>
+                  <a href="" data-dismiss="modal" ng-click="showReleaseInfo(alb.id)"><img class="album-thumb" ng-if="alb.thumb!=''" ng-src="{{alb.thumb}}">
+                  <img class="album.thumb" ng-if="alb.thumb==''" ng-src="img/album-default.png">          
+                  </a>
+                  </center>
+                  </div>                
+            </div>
 
 
           <div class="modal-footer">

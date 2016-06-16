@@ -30,7 +30,6 @@ progtonode.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
 });
 
-
 progtonode.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {

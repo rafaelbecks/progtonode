@@ -1022,3 +1022,9 @@ body{
 {
   overflow-y : hidden;
 }
+
+.album-list
+{
+    overflow-y: auto;
+    max-height: 75vh;
+}

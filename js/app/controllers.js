@@ -14,6 +14,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 		  "links":[]
 	 	 };
 	};
+
 	$scope.showManualConstruction=false;
 	$scope.percentaje=0;
 	$scope.searching=false;
@@ -136,6 +137,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 					$scope.albums.push(albums[i]);
 				}
 			}
+			console.log($scope.albums);
 		});
 	};
 
@@ -173,6 +175,8 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 					groupsOfNodes=data.data.data.members;
 				if(data.data.data.groups!=undefined)
 					groupsOfNodes=data.data.data.groups;
+				if(groupsOfNodes)
+				{
 					for(var j=0;j<groupsOfNodes.length;j++){
 						searchResults=[]; //Array to determinate if node is already in graph
 						for(k=0;k<$scope.graph.nodes.length;k++){
@@ -201,24 +205,29 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 								$scope.graph.links.push({"source":indexOrigin,"target":relations[l],"value":1});														
 							}
 						}
-					}
+					}					
+				}
 			});
 		}
 		};
 
 
 	$scope.build2nd=function(artistBase,type){
+		artistBase = artistBase || $scope.masterInfo;
 		emptyGraph();		
 		$("graph").hide();
 		$(".loader").show();
+		console.log(type);
 		if($scope.expanded){
 			if(type=="artist"){	
+				console.log("aqui");
 				if(artistBase.members!=undefined)
 					buildGraph2nd(artistBase.name,artistBase.members,0);
 				if(artistBase.groups!=undefined)
 					buildGraph2nd(artistBase.name,artistBase.groups,0);				
 			}else
 			{
+
 				buildGraph2nd(artistBase.title,artistBase.musicians,0);
 			}
 		}
@@ -260,8 +269,9 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
   	 $scope.tracking=[];
   }
 
- $scope.showReleaseInfo = function(url,thumb)
+ $scope.showReleaseInfo = function(releaseID,thumb)
  {
+ 	url= "https://api.discogs.com/masters/"+releaseID;
 	emptyGraph(); 
  	 if(thumb!=undefined)
 		$scope.img_artist=thumb;
@@ -316,7 +326,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	if(document.URL.indexOf("album")>0){
 		id_search=document.URL.substring(document.URL.indexOf("album")+6,document.URL.length);
 		$scope.searchType = 'master'; $("#switch").addClass("toggle-on");
-		$scope.showReleaseInfo("https://api.discogs.com/masters/"+id_search,undefined);
+		$scope.showReleaseInfo(id_search,undefined);
 		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
 	}
 
