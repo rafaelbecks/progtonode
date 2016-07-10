@@ -572,6 +572,7 @@ nav{
   border: 1px solid rgba(255,255,255,.1);
 }
 
+
 .controls .full-screen{
   font-size: 24px;
   position: relative;
@@ -707,6 +708,7 @@ rzslider .rz-pointer:after{
    width: 14%;
     position: relative;
     top: 10px;
+    cursor: pointer;
 }
 
 .logo-mini
@@ -729,7 +731,7 @@ rzslider .rz-pointer:after{
 }
 
 .text{
-    font-size: 20px;
+    font-size: 19px;
   text-align: justify;
  font-family: 'Lato', sans-serif !important;
  font-weight: 300;
@@ -741,7 +743,7 @@ button{
 }
 
 .huge {
-  font-size: 170px;
+  font-size: 150px;
 }
 
 .text-center {
@@ -750,6 +752,11 @@ button{
 
 .screenshot{
   width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+.screenshot-nw{
   border-radius: 5px;
   box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
@@ -1114,4 +1121,9 @@ body.modal-open div.results.container{
 
 .cool_btn_down:hover{
   background: rgba(255,255,255,.1);
+}
+
+.top_nothing
+{
+  margin-top: 0;
 }
