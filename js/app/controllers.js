@@ -57,7 +57,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 
 	$scope.showArtistData=function(id,thumb){
 	$scope.percentaje=0;
-  	location.href="#/?artist="+id;
+
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
@@ -69,8 +69,13 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	 	 };
 	 	 if(thumb!=undefined)
 			$scope.img_artist=thumb;
-	 	 //jQuery way to animate scroll to results, must find angular way
+
+		location.href="#/?artist="+id;
+
 		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
+
+		$scope.searchType = "artist";
+
 		$("graph").hide();
 		$(".loader").show();
 		services.getArtistInfo(id).then(function(data){
@@ -278,6 +283,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
 	$("graph").hide();
 	$(".loader").show();
+	$scope.searchType = "master";
  	services.genericService(url).then(function(data){
  		$scope.masterInfo = data.data.data;
  		location.href="#/?album="+$scope.masterInfo.id;
@@ -312,7 +318,9 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 
 	$scope.$watch("afterSearch",function(newValue){
 		if(newValue == true)
+		{
 			$("body").removeClass('noScroll');
+		}
 	});
 
 
@@ -320,7 +328,6 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	if(document.URL.indexOf("artist")>0){
 		id_search=document.URL.substring(document.URL.indexOf("artist")+7,document.URL.length);
 		$scope.showArtistData(id_search,undefined);
-		$("html, body").animate({ scrollTop: $('#results').offset().top -20}, 1000);
 	}
 
 	if(document.URL.indexOf("album")>0){
@@ -362,12 +369,31 @@ getArtistsByTracks = function(release)
 	return musicians;
 }
 
+  scrollTo = function(element, margin)
+  {
+		$("html, body").animate({ scrollTop: $(element).offset().top -margin}, 1000);
+  }
+
+
+
+Pace.on("done", function()
+	{
+		if(document.URL.indexOf("album")>0 || document.URL.indexOf("artist")>0)
+			$("html, body").scrollTop($('#results').offset().top -20);
+	});
+
 
 progtonode.controller("infoController",function($scope, $state){
     $("#searchIcon").show();
     $("#proglogoIcon").hide();
+    $("#searchIconBack").hide();
     $("body").removeClass('noScroll');
   particlesJS.load('particles-js', 'particles.json', function() {
     });
+
+  $scope.scrollTo = function(element, margin)
+  {
+		$("html, body").animate({ scrollTop: $(element).offset().top -margin}, 1000);
+  }
 
 });

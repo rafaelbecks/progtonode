@@ -9,7 +9,7 @@
                             <img src="img/logolight.png">                            
                         </center>
                         <input type="text" ng-enter="searchArtist(keywordSearch);" class="input-search" ng-model="keywordSearch" placeholder="Enter your prog search"/>  
-                        <button ng-click="searchArtist(keywordSearch);" class="search-button"><span ng-class="{ 'ion-load-c fa-spin': searching, 'ion-ios-search': searching==false }"></span></button>
+                        <button ng-click="searchArtist(keywordSearch);" class="search-button"><span ng-class="{ 'ion-load-c': searching, 'ion-ios-search': searching==false }"></span></button>
                         <br>
                         <br>
                         <center>
@@ -145,6 +145,7 @@
                                     <div class="buttons">
                                         <button ng-if="searchType=='artist'" ng-click="getReleases(artistBase.releases_url,artistBase.name);" class="btn info-buttons" data-toggle="modal" data-toggle="tooltip" title="Show albums" data-target="#modalAlbums"><i class="ion-ios-musical-notes"></i>&nbsp;&nbsp;Albums</button>
                                         <button ng-if="searchType=='artist'" type="button" class="btn info-buttons" data-toggle="modal" data-target="#modalYoutube"><i class="ion-social-youtube-outline"></i>&nbsp;&nbsp;Videos</button>
+                                        <button ng-if="searchType=='artist' && tracking.length>1" type="button" class="btn info-buttons" data-toggle="modal" data-target="#modalPath"><i class="ion-network"></i>&nbsp;&nbsp;Degrees</button>
                                     </div>
                                 </div>
 <!--div class="col-md-4 white-info ng-scope" ng-if="afterSearch==true">
@@ -180,7 +181,50 @@
 
                             </div>
                             </div>
-                            <div ng-if="tracking.length>1" id="wizard" class="form_wizard wizard_horizontal">
+                            
+                        </center>
+                    </div>
+                </div>
+
+            </div>
+
+
+    <div id="modalYoutube" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Listen some {{artistBase.name}} music</h4>
+                </div>
+          
+            <div ng-if="playlist_id!=undefined" class="modal-body">
+                <iframe width="560" height="315" ng-src="{{trustSrc(playlist_id_current)}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+          
+            <center><button ng-click="refreshPlayer(playlist_id)" type="button" class="btn btn-default"><span class="ion-ios-refresh-empty"></span>&nbsp;Refresh to current artists</button></center>
+            </br>
+          
+           <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><span class="ion-ios-close-outline"></span>&nbsp;&nbsp;Close</button>
+          </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+<div id="modalPath" class="modal fade" role="dialog">
+        <div class="modal-dialog mt10">
+        <!-- Modal content-->
+            <div class="modal-content transparent-modal">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Degrees</h4>
+                </div>
+
+                <div ng-if="tracking.length>1" id="wizard" class="form_wizard wizard_horizontal">
                                     <ul class="wizard_steps anchor">
                                         <li ng-repeat="track in tracking">
                                             <a href="#step-1" class="done" isdone="1" rel="1">
@@ -191,35 +235,15 @@
                                         </li>
                                     </ul>
                                         
-                                </div>
-                        </center>
-                    </div>
                 </div>
+                    
+           <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><span class="ion-ios-close-outline"></span>&nbsp;&nbsp;Close</button>
+          </div>
 
             </div>
 
-
-               <div id="modalYoutube" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Listen some {{artistBase.name}} music</h4>
-          </div>
-          <div ng-if="playlist_id!=undefined" class="modal-body">
-           <iframe width="560" height="315" ng-src="{{trustSrc(playlist_id_current)}}" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <center><button ng-click="refreshPlayer(playlist_id)" type="button" class="btn btn-default"><span class="ion-ios-refresh-empty"></span>&nbsp;Refresh to current artists</button></center>
-          </br>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="ion-ios-close-outline"></span>&nbsp;&nbsp;Close</button>
-          </div>
-
         </div>
-
-      </div>
     </div>
 
     <div id="modalAlbums" class="modal fade" role="dialog">

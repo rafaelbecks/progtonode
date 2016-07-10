@@ -9,7 +9,8 @@ var exceptions = [
     "producer",
     "management",
     "layout",
-    "directed"
+    "directed",
+    "thanks"
 ]
 
 isException = function(rol)

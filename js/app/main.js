@@ -15,6 +15,11 @@ paceOptions = {
 
 var progtonode=angular.module('progtonode',['ngSanitize','rzModule','ui.router']);
 
+
+progtonode.run(['$anchorScroll', function($anchorScroll) {
+    $anchorScroll = angular.noop;
+}])
+
 progtonode.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {        
         $stateProvider
             .state('main', {

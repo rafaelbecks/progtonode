@@ -706,7 +706,7 @@ rzslider .rz-pointer:after{
 .logo-nav-bar{
    width: 14%;
     position: relative;
-    bottom: 4px;
+    top: 10px;
 }
 
 .logo-mini
@@ -1027,4 +1027,91 @@ body{
 {
     overflow-y: auto;
     max-height: 75vh;
+}
+
+body.modal-open div.results.container{
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+}
+
+.transparent-modal
+{
+  background: rgba(0,0,0,.5);
+  border : none;
+}
+
+.transparent-modal .modal-title
+{
+  color:#fff;
+}
+
+.transparent-modal .modal-header
+{
+  border-bottom : transparent;
+}
+
+.transparent-modal .modal-footer
+{
+  border-top : transparent;
+}
+
+.transparent-modal .btn-default
+{
+    color: #FFFFFF;
+    background-color: transparent;
+    border-color: rgba(255,255,255,.4);
+}
+
+.mt10
+{
+  margin-top: 10%;
+}
+
+.alpha-tag
+{
+    color: #fff;
+    margin-left: 12px;
+    position: relative;
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    top: 12px;
+  }
+
+  .quenya-logo
+  {
+    position: relative;
+    bottom: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+    width: 70px;
+  }
+
+.hexagon
+{
+    position: relative;
+    bottom: 37px;
+    width: 72%;
+
+}
+
+
+.cool_btn_down{
+  font-size: 34px;
+  border: 1px solid rgba(255,255,255,.5);
+  padding: 0px 9px 0px 9px;
+  border-radius: 28px;
+  cursor: pointer;
+      transition: all 0.3s ease-in-out !important;
+  -webkit-transition: all 0.3s ease-in-out !important;
+  -ms-transition: all 0.3s ease-in-out !important;
+  -moz-transition: all 0.3s ease-in-out !important;
+  -o-transition: all 0.3s ease-in-out !important;
+}
+
+.cool_btn_down:hover{
+  background: rgba(255,255,255,.1);
 }
