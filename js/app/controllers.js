@@ -36,11 +36,15 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 
 	$scope.setSearchMode = function(current)
 	{
+		mixpanel.track("change search mode", current);
 		$scope.searchType = (current=="artist") ? "master" : "artist";
 	}
 
 
 	$scope.searchArtist=function(keyword){
+
+	mixpanel.track("search artist", {keyword: keyword});
+
 	 $scope.graph={
 	  "nodes":[],
 	  "links":[]
@@ -61,6 +65,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	if(id==undefined){
 		swal("Sorry", "The artist doesn't exists", "error");
 	}else{
+	mixpanel.track("click artist", {id: id, thumb: thumb});
 	$scope.afterSearch=true;
 	$scope.loading = true;
 		 $scope.graph={
@@ -156,6 +161,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 				//Links
 				$scope.graph.links.push({"source":0,"target":i+1,"value":1});
 		}
+		mixpanel.track("1st level graph", {graph: $scope.graph});
 		$scope.buildG();
 	};
 
@@ -163,6 +169,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
 	buildGraph2nd=function(name,groups,mainId){
 		found=false;
 		relations=[]; // Array to save the relationships of repetitions
+		mixpanel.track("2nd level graph begin", {id: mainId, name: name});
 		$scope.percentaje=0;
 		$scope.porc=100/groups.length;
 		$scope.graph.nodes.push({"name":name,"group":1,"id_discogs":mainId});
@@ -311,6 +318,7 @@ progtonode.controller('mainController', function($scope ,$http, services,$sce,$s
     if(newValue>=80){
     	$scope.showManualConstruction=false;
     	setTimeout(function(){
+			mixpanel.track("showed graph", {graph : $scope.graph});
     		$scope.buildG();
     	},1500);
     }
